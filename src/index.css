@@ -1,0 +1,258 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Hide scrollbar for horizontal scroll while keeping functionality */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Light mode variables */
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 258 90% 66%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 187 100% 40%;
+    /* Darker cyan for light mode visibility */
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 258 90% 66%;
+
+    --radius: 1rem;
+
+    /* Custom brand gradients - Light mode */
+    --gradient-primary: linear-gradient(135deg, hsl(258 90% 66%), hsl(330 85% 65%), hsl(25 95% 62%));
+    --gradient-accent: linear-gradient(135deg, hsl(258 90% 66%), hsl(187 100% 40%));
+    --gradient-glow: linear-gradient(135deg, hsl(258 90% 66% / 0.1), hsl(330 85% 65% / 0.1), hsl(25 95% 62% / 0.1));
+
+    /* Glass effect - Light mode */
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(0, 0, 0, 0.1);
+
+    /* Glows and shadows - Light mode */
+    --glow-primary: 0 0 40px hsl(258 90% 66% / 0.2);
+    --glow-accent: 0 0 40px hsl(187 100% 40% / 0.2);
+    --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    /* Deep navy/charcoal base */
+    --background: 221 70% 5%;
+    --foreground: 0 0% 100%;
+
+    /* Glassmorphic card backgrounds */
+    --card: 221 60% 8%;
+    --card-foreground: 0 0% 100%;
+
+    --popover: 221 60% 8%;
+    --popover-foreground: 0 0% 100%;
+
+    /* Primary gradient purple */
+    --primary: 258 90% 66%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Secondary muted dark */
+    --secondary: 221 50% 15%;
+    --secondary-foreground: 0 0% 100%;
+
+    /* Muted surfaces */
+    --muted: 221 45% 12%;
+    --muted-foreground: 220 9% 69%;
+
+    /* Accent cyan */
+    --accent: 187 100% 50%;
+    --accent-foreground: 221 70% 5%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 221 40% 20%;
+    --input: 221 40% 20%;
+    --ring: 258 90% 66%;
+
+    /* Custom brand gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(258 90% 66%), hsl(330 85% 65%), hsl(25 95% 62%));
+    --gradient-accent: linear-gradient(135deg, hsl(258 90% 66%), hsl(187 100% 50%));
+    --gradient-glow: linear-gradient(135deg, hsl(258 90% 66% / 0.3), hsl(330 85% 65% / 0.3), hsl(25 95% 62% / 0.3));
+
+    /* Glass effect */
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+
+    /* Glows and shadows */
+    --glow-primary: 0 0 40px hsl(258 90% 66% / 0.5);
+    --glow-accent: 0 0 40px hsl(187 100% 50% / 0.5);
+    --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-[Inter] antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-[Poppins];
+  }
+}
+
+@layer utilities {
+  .glass-effect {
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-glass);
+  }
+
+  .text-gradient {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .glow-primary {
+    box-shadow: var(--glow-primary);
+  }
+
+  .glow-accent {
+    box-shadow: var(--glow-accent);
+  }
+
+  .animate-glow {
+    animation: glow 3s ease-in-out infinite alternate;
+  }
+
+  @keyframes glow {
+    from {
+      box-shadow: 0 0 20px hsl(258 90% 66% / 0.3);
+    }
+
+    to {
+      box-shadow: 0 0 40px hsl(258 90% 66% / 0.6), 0 0 60px hsl(330 85% 65% / 0.4);
+    }
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+
+  .animate-slide-in {
+    animation: slideIn 0.6s ease-out;
+  }
+
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* 3D perspective effects */
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  .rotate-y-12 {
+    transform: rotateY(12deg);
+  }
+
+  .transform-gpu {
+    transform: translateZ(0);
+    will-change: transform;
+  }
+
+  /* Parallax scroll effect */
+  .parallax {
+    transform: translateZ(-1px) scale(2);
+  }
+
+  /* Enhanced hover effects with 3D transforms */
+  .hover-3d {
+    transition: transform 0.3s ease-out;
+  }
+
+  .hover-3d:hover {
+    transform: translateY(-10px) rotateX(5deg);
+  }
+
+  /* Radial gradient utility */
+  .bg-gradient-radial {
+    background: radial-gradient(circle, var(--tw-gradient-stops));
+  }
+}
