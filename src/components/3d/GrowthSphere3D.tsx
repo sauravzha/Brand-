@@ -29,20 +29,28 @@ const AnimatedSphere = ({ color, position }: { color: string; position: [number,
   );
 };
 
+export const GrowthSphereScene = () => {
+  return (
+    <>
+      <ambientLight intensity={0.5} />
+      <pointLight position={[10, 10, 10]} intensity={1} />
+      <pointLight position={[-10, -10, -10]} intensity={0.5} color="#8b5cf6" />
+
+      <AnimatedSphere color="#8b5cf6" position={[-2, 0, 0]} />
+      <AnimatedSphere color="#ec4899" position={[2, 0, 0]} />
+      <AnimatedSphere color="#00e5ff" position={[0, 2, -1]} />
+      <AnimatedSphere color="#f97316" position={[0, -2, -1]} />
+
+      <OrbitControls enableZoom={false} enablePan={false} autoRotate autoRotateSpeed={1} />
+    </>
+  );
+};
+
 const GrowthSphere3D = () => {
   return (
     <div className="w-full h-full">
       <Canvas camera={{ position: [0, 0, 5], fov: 50 }} gl={{ alpha: true }} style={{ background: 'transparent' }}>
-        <ambientLight intensity={0.5} />
-        <pointLight position={[10, 10, 10]} intensity={1} />
-        <pointLight position={[-10, -10, -10]} intensity={0.5} color="#8b5cf6" />
-
-        <AnimatedSphere color="#8b5cf6" position={[-2, 0, 0]} />
-        <AnimatedSphere color="#ec4899" position={[2, 0, 0]} />
-        <AnimatedSphere color="#00e5ff" position={[0, 2, -1]} />
-        <AnimatedSphere color="#f97316" position={[0, -2, -1]} />
-
-        <OrbitControls enableZoom={false} enablePan={false} autoRotate autoRotateSpeed={1} />
+        <GrowthSphereScene />
       </Canvas>
     </div>
   );

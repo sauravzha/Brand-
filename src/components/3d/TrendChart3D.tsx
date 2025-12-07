@@ -95,7 +95,7 @@ const TrendLine = ({ scrollProgress }: { scrollProgress: number }) => {
   );
 };
 
-const TrendChart3D = ({ triggerScroll = 0 }: { triggerScroll?: number }) => {
+export const TrendChartScene = ({ triggerScroll = 0 }: { triggerScroll?: number }) => {
   const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
@@ -112,13 +112,21 @@ const TrendChart3D = ({ triggerScroll = 0 }: { triggerScroll?: number }) => {
   }, [triggerScroll]);
 
   return (
+    <>
+      <ambientLight intensity={0.5} />
+      <pointLight position={[10, 10, 10]} intensity={1} />
+      <pointLight position={[-10, -10, -10]} intensity={0.5} color="#ec4899" />
+      <TrendLine scrollProgress={scrollProgress} />
+      <OrbitControls enableZoom={false} enablePan={false} autoRotate autoRotateSpeed={0.5} />
+    </>
+  );
+};
+
+const TrendChart3D = (props: { triggerScroll?: number }) => {
+  return (
     <div className="w-full h-full">
       <Canvas camera={{ position: [0, 2, 6], fov: 50 }} gl={{ alpha: true }} style={{ background: 'transparent' }}>
-        <ambientLight intensity={0.5} />
-        <pointLight position={[10, 10, 10]} intensity={1} />
-        <pointLight position={[-10, -10, -10]} intensity={0.5} color="#ec4899" />
-        <TrendLine scrollProgress={scrollProgress} />
-        <OrbitControls enableZoom={false} enablePan={false} autoRotate autoRotateSpeed={0.5} />
+        <TrendChartScene {...props} />
       </Canvas>
     </div>
   );

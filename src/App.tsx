@@ -11,6 +11,8 @@ import NotFound from "./pages/NotFound";
 import BlogPost from "./pages/BlogPost";
 import LoadingScreen from "@/components/LoadingScreen";
 import PageTransition from "@/components/PageTransition";
+import ErrorBoundary from "@/components/ErrorBoundary";
+import CookieConsent from "@/components/CookieConsent";
 
 import Careers from "./pages/Careers";
 
@@ -52,9 +54,12 @@ const App = () => {
           <Toaster />
           <Sonner />
           {isLoading && <LoadingScreen onLoadingComplete={() => setIsLoading(false)} />}
-          <BrowserRouter>
-            <AnimatedRoutes />
-          </BrowserRouter>
+          <ErrorBoundary>
+            <BrowserRouter>
+              <AnimatedRoutes />
+              <CookieConsent />
+            </BrowserRouter>
+          </ErrorBoundary>
         </TooltipProvider>
       </QueryClientProvider>
     </ThemeProvider>

@@ -3,8 +3,15 @@ import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import { useState } from "react";
 import { toast } from "sonner";
+import { Loader2 } from "lucide-react";
 import MessageBubbles3D from "./3d/MessageBubbles3D";
 import GrowthSphere3D from "./3d/GrowthSphere3D";
+
+interface FormErrors {
+  name?: string;
+  email?: string;
+  message?: string;
+}
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
@@ -13,21 +20,82 @@ const ContactSection = () => {
     business: "",
     message: ""
   });
+  const [errors, setErrors] = useState<FormErrors>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const validateForm = (): boolean => {
+    const newErrors: FormErrors = {};
+
+    if (!formData.name.trim()) {
+      newErrors.name = "Name is required";
+    } else if (formData.name.trim().length < 2) {
+      newErrors.name = "Name must be at least 2 characters";
+    }
+
+    if (!formData.email.trim()) {
+      newErrors.email = "Email is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = "Please enter a valid email address";
+    }
+
+    if (!formData.message.trim()) {
+      newErrors.message = "Message is required";
+    } else if (formData.message.trim().length < 10) {
+      newErrors.message = "Message must be at least 10 characters";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Here you would typically send the form data to your backend
-    toast.success("Message sent! We'll get back to you soon.", {
-      description: "Thank you for reaching out to Brandयात्रा"
-    });
-    setFormData({ name: "", email: "", business: "", message: "" });
+    
+    if (!validateForm()) {
+      toast.error("Please fix the errors in the form", {
+        description: "Check all required fields are filled correctly"
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      // Simulate API call - Replace with actual API endpoint
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      
+      // Here you would typically send the form data to your backend
+      // Example: await fetch('/api/contact', { method: 'POST', body: JSON.stringify(formData) })
+      
+      toast.success("Message sent successfully! 🎉", {
+        description: "We'll get back to you within 24-48 hours"
+      });
+      
+      setFormData({ name: "", email: "", business: "", message: "" });
+      setErrors({});
+    } catch (error) {
+      toast.error("Failed to send message", {
+        description: "Please try again or contact us directly at hello.brandyatra@gmail.com"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [name]: value
     });
+    
+    // Clear error when user starts typing
+    if (errors[name as keyof FormErrors]) {
+      setErrors({
+        ...errors,
+        [name]: undefined
+      });
+    }
   };
 
   return (
@@ -76,8 +144,13 @@ const ContactSection = () => {
                     onChange={handleChange}
                     required
                     placeholder="Your full name"
-                    className="glass-effect border-primary/30 focus:border-primary transition-all duration-300 h-12"
+                    className={`glass-effect border-primary/30 focus:border-primary transition-all duration-300 h-12 ${
+                      errors.name ? 'border-destructive' : ''
+                    }`}
                   />
+                  {errors.name && (
+                    <p className="text-sm text-destructive mt-1">{errors.name}</p>
+                  )}
                 </div>
                 <div className="space-y-2">
                   <label htmlFor="email" className="text-sm font-medium text-foreground">
@@ -91,8 +164,13 @@ const ContactSection = () => {
                     onChange={handleChange}
                     required
                     placeholder="your@email.com"
-                    className="glass-effect border-primary/30 focus:border-primary transition-all duration-300 h-12"
+                    className={`glass-effect border-primary/30 focus:border-primary transition-all duration-300 h-12 ${
+                      errors.email ? 'border-destructive' : ''
+                    }`}
                   />
+                  {errors.email && (
+                    <p className="text-sm text-destructive mt-1">{errors.email}</p>
+                  )}
                 </div>
               </div>
 
@@ -122,17 +200,36 @@ const ContactSection = () => {
                   required
                   placeholder="Tell us about your project and goals..."
                   rows={6}
-                  className="glass-effect border-primary/30 focus:border-primary transition-all duration-300 resize-none"
+                  maxLength={500}
+                  className={`glass-effect border-primary/30 focus:border-primary transition-all duration-300 resize-none ${
+                    errors.message ? 'border-destructive' : ''
+                  }`}
                 />
+                {errors.message && (
+                  <p className="text-sm text-destructive mt-1">{errors.message}</p>
+                )}
+                <p className={`text-xs mt-1 ${formData.message.length > 450 ? 'text-warning' : 'text-muted-foreground'}`}>
+                  {formData.message.length} / 500 characters
+                </p>
               </div>
 
               <Button
                 type="submit"
                 size="lg"
-                className="w-full sm:w-auto bg-gradient-to-r from-primary via-pink-500 to-orange-500 hover:shadow-xl hover:shadow-primary/50 transition-all duration-300 text-base sm:text-lg px-8 py-6 group"
+                disabled={isSubmitting}
+                className="w-full sm:w-auto bg-gradient-to-r from-primary via-pink-500 to-orange-500 hover:shadow-xl hover:shadow-primary/50 transition-all duration-300 text-base sm:text-lg px-8 py-6 group disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Send Message
-                <span className="inline-block ml-2 group-hover:translate-x-1 transition-transform">→</span>
+                {isSubmitting ? (
+                  <>
+                    <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                    Sending...
+                  </>
+                ) : (
+                  <>
+                    Send Message
+                    <span className="inline-block ml-2 group-hover:translate-x-1 transition-transform">→</span>
+                  </>
+                )}
               </Button>
             </form>
           </div>

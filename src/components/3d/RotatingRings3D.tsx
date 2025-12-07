@@ -27,19 +27,27 @@ const Ring = ({ radius, color, speed }: { radius: number; color: string; speed: 
   );
 };
 
+export const RotatingRingsScene = () => {
+  return (
+    <>
+      <ambientLight intensity={0.5} />
+      <pointLight position={[10, 10, 10]} intensity={1} />
+      <pointLight position={[-10, -10, -10]} intensity={0.5} color="#ec4899" />
+
+      <Ring radius={1.5} color="#8b5cf6" speed={0.5} />
+      <Ring radius={2} color="#ec4899" speed={-0.3} />
+      <Ring radius={2.5} color="#00e5ff" speed={0.4} />
+
+      <OrbitControls enableZoom={false} enablePan={false} autoRotate autoRotateSpeed={0.5} />
+    </>
+  );
+};
+
 const RotatingRings3D = () => {
   return (
     <div className="w-full h-full">
       <Canvas camera={{ position: [0, 0, 4], fov: 50 }} gl={{ alpha: true }} style={{ background: 'transparent' }}>
-        <ambientLight intensity={0.5} />
-        <pointLight position={[10, 10, 10]} intensity={1} />
-        <pointLight position={[-10, -10, -10]} intensity={0.5} color="#ec4899" />
-
-        <Ring radius={1.5} color="#8b5cf6" speed={0.5} />
-        <Ring radius={2} color="#ec4899" speed={-0.3} />
-        <Ring radius={2.5} color="#00e5ff" speed={0.4} />
-
-        <OrbitControls enableZoom={false} enablePan={false} autoRotate autoRotateSpeed={0.5} />
+        <RotatingRingsScene />
       </Canvas>
     </div>
   );

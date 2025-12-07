@@ -73,14 +73,22 @@ const Particles = () => {
   );
 };
 
+export const ParticleNetworkScene = () => {
+  return (
+    <>
+      <ambientLight intensity={0.5} />
+      <pointLight position={[10, 10, 10]} intensity={0.5} color="#8b5cf6" />
+      <Particles />
+      <OrbitControls enableZoom={false} enablePan={false} autoRotate autoRotateSpeed={0.5} />
+    </>
+  );
+};
+
 const ParticleNetwork3D = () => {
   return (
     <div className="absolute inset-0 w-full h-full pointer-events-none opacity-30">
       <Canvas camera={{ position: [0, 0, 8], fov: 60 }} gl={{ alpha: true }} style={{ background: 'transparent' }}>
-        <ambientLight intensity={0.5} />
-        <pointLight position={[10, 10, 10]} intensity={0.5} color="#8b5cf6" />
-        <Particles />
-        <OrbitControls enableZoom={false} enablePan={false} autoRotate autoRotateSpeed={0.5} />
+        <ParticleNetworkScene />
       </Canvas>
     </div>
   );

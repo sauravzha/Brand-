@@ -20,7 +20,7 @@ const NewsletterSection = () => {
     };
 
     return (
-        <section className="py-20 sm:py-32 relative overflow-hidden">
+        <section id="newsletter" className="py-20 sm:py-32 relative overflow-hidden">
             {/* Background with gradient */}
             <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-secondary/5" />
 

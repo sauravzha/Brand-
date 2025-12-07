@@ -1,12 +1,14 @@
+import { Canvas } from "@react-three/fiber";
+import { View } from "@react-three/drei";
 import { Button } from "./ui/button";
 import { ArrowRight } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import logo from "@/assets/brandyatra-logo.png";
-import TrendChart3D from "./3d/TrendChart3D";
-import RotatingRings3D from "./3d/RotatingRings3D";
-import GrowthSphere3D from "./3d/GrowthSphere3D";
-import ParticleNetwork3D from "./3d/ParticleNetwork3D";
-import FloatingIcons3D from "./3d/FloatingIcons3D";
+import { TrendChartScene } from "./3d/TrendChart3D";
+import { RotatingRingsScene } from "./3d/RotatingRings3D";
+import { GrowthSphereScene } from "./3d/GrowthSphere3D";
+import { ParticleNetworkScene } from "./3d/ParticleNetwork3D";
+// FloatingIcons3D is commented out in original code
 
 const AnimatedCounter = ({ end, duration = 2000 }: { end: number; duration?: number }) => {
   const [count, setCount] = useState(0);
@@ -42,8 +44,39 @@ const HeroSection = () => {
     }
   };
 
+  const trendChartRef = useRef<HTMLDivElement>(null);
+  const rotatingRingsRef = useRef<HTMLDivElement>(null);
+  const particleNetworkRef = useRef<HTMLDivElement>(null);
+  const growthSphereRef = useRef<HTMLDivElement>(null);
+
+  // Safely get the root element for event source
+  const rootElement = typeof document !== "undefined" ? document.getElementById("root") : null;
+  const eventSource = rootElement || (typeof document !== "undefined" ? document.body : undefined);
+
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+      {/* Shared Canvas for all 3D elements */}
+      <div className="absolute inset-0 pointer-events-none z-0">
+        <Canvas
+          eventSource={eventSource}
+          className="w-full h-full pointer-events-auto"
+          gl={{ alpha: true }}
+        >
+          <View track={trendChartRef}>
+            <TrendChartScene />
+          </View>
+          <View track={rotatingRingsRef}>
+            <RotatingRingsScene />
+          </View>
+          <View track={particleNetworkRef}>
+            <ParticleNetworkScene />
+          </View>
+          <View track={growthSphereRef}>
+            <GrowthSphereScene />
+          </View>
+        </Canvas>
+      </div>
+
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl animate-float" />
@@ -51,22 +84,17 @@ const HeroSection = () => {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-pink-500/10 rounded-full blur-3xl animate-pulse" />
       </div>
 
-      {/* 3D Components */}
-      <div className="absolute right-0 top-20 w-full md:w-1/2 h-[400px] pointer-events-none opacity-40">
-        <TrendChart3D />
-      </div>
-      <div className="absolute left-0 top-10 w-full md:w-1/2 h-[400px] pointer-events-none opacity-30">
-        <RotatingRings3D />
-      </div>
-      <div className="absolute left-0 top-0 w-full md:w-1/2 h-[500px] pointer-events-none opacity-40">
+      {/* 3D Components Placeholders */}
+      <div ref={trendChartRef} className="absolute right-0 top-20 w-full md:w-1/2 h-[400px] pointer-events-none opacity-40" />
+      <div ref={rotatingRingsRef} className="absolute left-0 top-10 w-full md:w-1/2 h-[400px] pointer-events-none opacity-30" />
+
+      {/* <div className="absolute left-0 top-0 w-full md:w-1/2 h-[500px] pointer-events-none opacity-40">
         <FloatingIcons3D />
-      </div>
-      <div className="absolute inset-0 w-full h-full pointer-events-none opacity-20">
-        <ParticleNetwork3D />
-      </div>
-      <div className="absolute left-0 bottom-20 w-full md:w-1/3 h-[300px] pointer-events-none opacity-20">
-        <GrowthSphere3D />
-      </div>
+      </div> */}
+
+      <div ref={particleNetworkRef} className="absolute inset-0 w-full h-full pointer-events-none opacity-20" />
+
+      <div ref={growthSphereRef} className="absolute left-0 bottom-20 w-full md:w-1/3 h-[300px] pointer-events-none opacity-20" />
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center space-y-8 animate-slide-in">
