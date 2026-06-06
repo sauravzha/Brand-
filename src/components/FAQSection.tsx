@@ -90,12 +90,8 @@ const FAQSection = () => {
         <div className="text-center mt-12 sm:mt-16">
           <p className="text-muted-foreground mb-4">Still have questions?</p>
           <a
-            href="#contact"
+            href="mailto:jhasaurav562@gmail.com"
             className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors font-medium text-lg group"
-            onClick={(e) => {
-              e.preventDefault();
-              document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-            }}
           >
             Get in touch with us
             <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">

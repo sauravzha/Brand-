@@ -7,8 +7,8 @@ export interface ServiceDetail {
 }
 
 export const serviceDetails: Record<string, ServiceDetail> = {
-  "Instagram Ads Management": {
-    title: "Instagram Ads Management",
+  "Instagram Ads": {
+    title: "Instagram Ads",
     description: "Transform your Instagram presence into a powerful sales engine with our data-driven ad campaigns designed for maximum engagement and conversions.",
     whyChooseUs: [
       "We create visually stunning ads that stop the scroll and capture attention in a crowded feed",
@@ -36,8 +36,8 @@ export const serviceDetails: Record<string, ServiceDetail> = {
       "Influencer collaboration management (if needed)"
     ]
   },
-  "Facebook Ads Management": {
-    title: "Facebook Ads Management",
+  "Facebook Ads": {
+    title: "Facebook Ads",
     description: "Leverage Facebook's massive user base and sophisticated targeting capabilities to reach your perfect customers and drive measurable business results.",
     whyChooseUs: [
       "We utilize Facebook's powerful Business Suite to create campaigns that convert browsers into buyers",
@@ -65,8 +65,8 @@ export const serviceDetails: Record<string, ServiceDetail> = {
       "Cross-platform campaign management (Facebook + Instagram)"
     ]
   },
-  "YouTube Ads": {
-    title: "YouTube Ads",
+  "YouTube Video Ads": {
+    title: "YouTube Video Ads",
     description: "Tell your brand story through compelling video content and reach millions of potential customers on the world's second-largest search engine.",
     whyChooseUs: [
       "We create video content that resonates with Indian audiences and drives action",
@@ -95,8 +95,8 @@ export const serviceDetails: Record<string, ServiceDetail> = {
       "Performance tracking with YouTube Analytics"
     ]
   },
-  "Google Ads (Search & Display)": {
-    title: "Google Ads (Search & Display)",
+  "Google Search & Display": {
+    title: "Google Search & Display",
     description: "Capture high-intent customers actively searching for your products or services with strategic Google Ads campaigns that deliver exceptional ROI.",
     whyChooseUs: [
       "We are Google Ads certified experts with years of experience managing six-figure budgets",
@@ -188,8 +188,8 @@ export const serviceDetails: Record<string, ServiceDetail> = {
       "Core Web Vitals optimization for better UX"
     ]
   },
-  "Email Marketing & Automation": {
-    title: "Email Marketing & Automation",
+  "Email Automation": {
+    title: "Email Automation",
     description: "Nurture leads and retain customers with personalized email campaigns that drive engagement, conversions, and repeat business on autopilot.",
     whyChooseUs: [
       "We design beautiful, mobile-responsive email templates that reflect your brand",
@@ -219,8 +219,8 @@ export const serviceDetails: Record<string, ServiceDetail> = {
       "Deliverability optimization and list cleaning"
     ]
   },
-  "Brand Strategy & Consulting": {
-    title: "Brand Strategy & Consulting",
+  "Brand Strategy": {
+    title: "Brand Strategy",
     description: "Define your unique brand identity and create a strategic roadmap for growth with expert consulting that aligns your marketing with business objectives.",
     whyChooseUs: [
       "We help startups find their unique voice in crowded markets",

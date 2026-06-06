@@ -1,4 +1,4 @@
-import { Instagram, Linkedin, Youtube, Facebook } from "lucide-react";
+import { Instagram, Linkedin, Youtube, Facebook, Mail } from "lucide-react";
 import logo from "@/assets/brandyatra-logo.png";
 import { Link } from "react-router-dom";
 
@@ -34,7 +34,7 @@ const Footer = () => {
             </h4>
             <div className="flex items-center justify-center gap-4">
               <a
-                href="https://www.instagram.com/brand_yatraa/"
+                href="https://www.instagram.com/brand_yatraa?igsh=dmprcm1yM2JkODlx"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 sm:w-12 sm:h-12 glass-effect rounded-full flex items-center justify-center hover:scale-110 hover:shadow-lg hover:shadow-primary/30 transition-all duration-300 group"
@@ -65,6 +65,17 @@ const Footer = () => {
               >
                 <Facebook className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
               </a>
+              <a
+                href="mailto:hello@brandyatra.com"
+                className="w-10 h-10 sm:w-12 sm:h-12 glass-effect rounded-full flex items-center justify-center hover:scale-110 hover:shadow-lg hover:shadow-primary/30 transition-all duration-300 group"
+              >
+                <Mail className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
+              </a>
+            </div>
+            <div className="mt-4">
+              <a href="mailto:hello@brandyatra.com" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                hello@brandyatra.com
+              </a>
             </div>
           </div>
 
@@ -90,7 +101,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-border/50">
           <p className="text-center text-xs sm:text-sm text-muted-foreground">
-            © 2025 Brandयात्रा — <span className="text-gradient">Grow with Us</span>. All Rights Reserved.
+            © 2026 Brandयात्रा — <span className="text-gradient">Grow with Us</span>. All Rights Reserved.
           </p>
         </div>
       </div>

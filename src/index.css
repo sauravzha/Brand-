@@ -255,4 +255,17 @@ All colors MUST be HSL.
   .bg-gradient-radial {
     background: radial-gradient(circle, var(--tw-gradient-stops));
   }
+
+  .animate-marquee {
+    animation: marquee 30s linear infinite;
+  }
+
+  @keyframes marquee {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
 }

@@ -83,7 +83,7 @@ const Navbar = () => {
               Blog
             </button>
             <button
-              onClick={() => scrollToSection("contact")}
+              onClick={() => window.location.href = "mailto:jhasaurav562@gmail.com"}
               className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors"
             >
               Contact
@@ -94,7 +94,7 @@ const Navbar = () => {
           {/* CTA Button - Desktop */}
           <div className="hidden md:block">
             <Button
-              onClick={() => scrollToSection("contact")}
+              onClick={() => window.location.href = "mailto:jhasaurav562@gmail.com"}
               className="relative overflow-hidden group bg-gradient-to-r from-primary via-pink-500 to-orange-500 hover:shadow-lg hover:shadow-primary/50 transition-all duration-300"
             >
               <span className="relative z-10">Get in Touch</span>
@@ -155,14 +155,14 @@ const Navbar = () => {
               Blog
             </button>
             <button
-              onClick={() => scrollToSection("contact")}
+              onClick={() => window.location.href = "mailto:jhasaurav562@gmail.com"}
               className="block w-full text-left px-4 py-3 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-white/5 rounded-lg transition-colors"
             >
               Contact
             </button>
             <div className="pt-2">
               <Button
-                onClick={() => scrollToSection("contact")}
+                onClick={() => window.location.href = "mailto:jhasaurav562@gmail.com"}
                 className="w-full bg-gradient-to-r from-primary via-pink-500 to-orange-500 hover:shadow-lg hover:shadow-primary/50"
               >
                 Get in Touch

@@ -1,14 +1,8 @@
-import { Canvas } from "@react-three/fiber";
-import { View } from "@react-three/drei";
 import { Button } from "./ui/button";
 import { ArrowRight } from "lucide-react";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import logo from "@/assets/brandyatra-logo.png";
-import { TrendChartScene } from "./3d/TrendChart3D";
-import { RotatingRingsScene } from "./3d/RotatingRings3D";
-import { GrowthSphereScene } from "./3d/GrowthSphere3D";
-import { ParticleNetworkScene } from "./3d/ParticleNetwork3D";
-// FloatingIcons3D is commented out in original code
+import HeroDevices3D from "./3d/HeroDevices3D";
 
 const AnimatedCounter = ({ end, duration = 2000 }: { end: number; duration?: number }) => {
   const [count, setCount] = useState(0);
@@ -37,68 +31,26 @@ const AnimatedCounter = ({ end, duration = 2000 }: { end: number; duration?: num
 };
 
 const HeroSection = () => {
-  const scrollToContact = () => {
-    const element = document.getElementById("contact");
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
+  const handleContactClick = () => {
+    window.location.href = "mailto:jhasaurav562@gmail.com";
   };
-
-  const trendChartRef = useRef<HTMLDivElement>(null);
-  const rotatingRingsRef = useRef<HTMLDivElement>(null);
-  const particleNetworkRef = useRef<HTMLDivElement>(null);
-  const growthSphereRef = useRef<HTMLDivElement>(null);
-
-  // Safely get the root element for event source
-  const rootElement = typeof document !== "undefined" ? document.getElementById("root") : null;
-  const eventSource = rootElement || (typeof document !== "undefined" ? document.body : undefined);
 
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-      {/* Shared Canvas for all 3D elements */}
-      <div className="absolute inset-0 pointer-events-none z-0">
-        <Canvas
-          eventSource={eventSource}
-          className="w-full h-full pointer-events-auto"
-          dpr={[1, 1.5]}
-          gl={{ powerPreference: "high-performance", antialias: false, alpha: true }}
-        >
-          <View track={trendChartRef}>
-            <TrendChartScene />
-          </View>
-          <View track={rotatingRingsRef}>
-            <RotatingRingsScene />
-          </View>
-          <View track={particleNetworkRef}>
-            <ParticleNetworkScene />
-          </View>
-          <View track={growthSphereRef}>
-            <GrowthSphereScene />
-          </View>
-        </Canvas>
+      {/* 3D Devices Background */}
+      <div className="absolute inset-0 z-0">
+        <HeroDevices3D />
       </div>
 
       {/* Animated Background Elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl animate-float" />
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '1s' }} />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-pink-500/10 rounded-full blur-3xl animate-pulse" />
       </div>
 
-      {/* 3D Components Placeholders */}
-      <div ref={trendChartRef} className="absolute right-0 top-20 w-full md:w-1/2 h-[400px] pointer-events-none opacity-40" />
-      <div ref={rotatingRingsRef} className="absolute left-0 top-10 w-full md:w-1/2 h-[400px] pointer-events-none opacity-30 hidden md:block" />
-
-      {/* <div className="absolute left-0 top-0 w-full md:w-1/2 h-[500px] pointer-events-none opacity-40">
-        <FloatingIcons3D />
-      </div> */}
-
-      <div ref={particleNetworkRef} className="absolute inset-0 w-full h-full pointer-events-none opacity-20" />
-
-      <div ref={growthSphereRef} className="absolute left-0 bottom-20 w-full md:w-1/3 h-[300px] pointer-events-none opacity-20 hidden md:block" />
-
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center space-y-8 animate-slide-in">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pointer-events-none">
+        <div className="text-center space-y-8 animate-slide-in pointer-events-auto">
           {/* Logo Icon */}
           <div className="inline-flex items-center justify-center">
             <img src={logo} alt="Brandयात्रा Logo" className="h-40 sm:h-52 w-40 sm:w-52 rounded-full object-cover" />
@@ -122,7 +74,7 @@ const HeroSection = () => {
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
             <Button
-              onClick={scrollToContact}
+              onClick={handleContactClick}
               size="lg"
               className="w-full sm:w-auto bg-gradient-to-r from-primary via-pink-500 to-orange-500 hover:shadow-xl hover:shadow-primary/50 transition-all duration-300 text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 group"
             >
@@ -130,10 +82,10 @@ const HeroSection = () => {
               <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
             </Button>
             <Button
-              onClick={scrollToContact}
+              onClick={handleContactClick}
               variant="outline"
               size="lg"
-              className="w-full sm:w-auto border-2 border-primary/50 hover:border-primary hover:bg-primary/10 transition-all duration-300 text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6"
+              className="w-full sm:w-auto border-2 border-primary/50 hover:border-primary hover:bg-primary/10 transition-all duration-300 text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 bg-background/50 backdrop-blur-md"
             >
               💡 Get Free Consultation
             </Button>
@@ -164,7 +116,7 @@ const HeroSection = () => {
       </div>
 
       {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce pointer-events-none z-10">
         <div className="w-6 h-10 rounded-full border-2 border-primary/50 flex items-start justify-center p-2">
           <div className="w-1 h-3 bg-primary rounded-full animate-pulse" />
         </div>

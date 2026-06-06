@@ -4,39 +4,39 @@ import RotatingRings3D from "./3d/RotatingRings3D";
 
 const pricingPlans = [
   {
-    name: "Starter",
-    price: "₹8000",
+    name: "Essential Growth",
+    price: "₹20,000",
     period: "/month",
     description: "Perfect for small businesses starting their digital journey",
     icon: Sparkles,
     color: "from-purple-500 to-pink-500",
     features: [
-      "1 Social Media Platforms Management",
-      "5 Posts per week",
-      "Basic Ad Campaign (Instagram/Facebook)",
+      "Social Media Management (1 Platform)",
+      "12 Posts per month",
+      "Basic SEO Optimization",
+      "Content Creation & Copywriting",
       "Monthly Performance Report",
       "Email Support",
-      "Content Calendar",
     ],
     cta: "Start Growing",
     popular: false
   },
   {
-    name: "Growth",
-    price: "₹17,999",
+    name: "Accelerated Scale",
+    price: "₹50,000",
     period: "/month",
-    description: "Ideal for growing brands ready to scale their presence",
+    description: "Ideal for growing brands ready to aggressively scale",
     icon: TrendingUp,
     color: "from-primary to-accent",
     features: [
-      "3 Social Media Platforms Management",
-      "8 Posts per week + Stories",
-      "Multi-Platform Ad Campaigns",
+      "Social Media Management (3 Platforms)",
+      "20 Posts per month + Stories/Reels",
+      "Paid Ads Management (Meta & Google)",
+      "Advanced SEO Strategy",
+      "Influencer Outreach",
+      "Funnel Building & Optimization",
       "Bi-weekly Strategy Calls",
-      "Email Marketing (2 campaigns/month)",
-      "Advanced Analytics & Reporting",
-      "Priority Support",
-      "Competitor Analysis"
+      "Priority Support"
     ],
     cta: "Scale Your Brand",
     popular: true
@@ -50,16 +50,12 @@ const pricingPlans = [
     color: "from-orange-500 to-red-500",
     features: [
       "All Social Platforms Management",
-      "Unlimited Content Creation",
+      "Unlimited Content & Video Production",
       "Full-Funnel Ad Campaigns",
-      "YouTube Ads + Video Production",
+      "Custom Web Development",
       "Weekly Strategy Sessions",
-      "Advanced SEO & SEM",
-      "Email Automation Workflows",
-      "Real-time Dashboard Access",
       "Dedicated Account Manager",
       "Brand Strategy Consulting",
-      "Influencer Partnerships",
       "Custom Integrations"
     ],
     cta: "Contact Sales",
@@ -68,11 +64,8 @@ const pricingPlans = [
 ];
 
 const PricingSection = () => {
-  const scrollToContact = () => {
-    const element = document.getElementById("contact");
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
+  const handleContactClick = () => {
+    window.location.href = "mailto:jhasaurav562@gmail.com";
   };
 
   return (
@@ -148,7 +141,7 @@ const PricingSection = () => {
 
                 {/* CTA Button */}
                 <Button
-                  onClick={scrollToContact}
+                  onClick={handleContactClick}
                   className={`w-full mb-8 text-base py-6 rounded-xl transition-all duration-300 ${
                     plan.popular
                       ? 'bg-gradient-to-r from-primary to-accent hover:shadow-xl hover:shadow-primary/50'
@@ -186,7 +179,7 @@ const PricingSection = () => {
           </p>
           <Button
             variant="outline"
-            onClick={scrollToContact}
+            onClick={handleContactClick}
             className="border-2 border-primary/50 hover:border-primary hover:bg-primary/10"
           >
             Contact Us for Custom Plans
