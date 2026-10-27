@@ -143,51 +143,51 @@ const HeroSection = () => {
               </button>
             </div>
 
-            {/* Trust Micro-Row */}
-            <div className="pt-2 flex flex-wrap items-center gap-6 text-xs text-muted-foreground font-medium">
-              <span className="flex items-center gap-1.5">
+            {/* Trust Micro-Row — 3D Clay Badges */}
+            <div className="pt-2 flex flex-wrap items-center gap-3 text-xs text-muted-foreground font-semibold">
+              <span className="clay-badge px-3 py-1.5 flex items-center gap-1.5 border border-white/10 text-foreground/90">
                 <ShieldCheck className="w-4 h-4 text-emerald-400" /> Meta & Google Certified
               </span>
-              <span className="flex items-center gap-1.5">
+              <span className="clay-badge px-3 py-1.5 flex items-center gap-1.5 border border-white/10 text-foreground/90">
                 <TrendingUp className="w-4 h-4 text-orange-400" /> ₹10Cr+ Ad Spend Managed
               </span>
-              <span className="flex items-center gap-1.5">
+              <span className="clay-badge px-3 py-1.5 flex items-center gap-1.5 border border-white/10 text-foreground/90">
                 <Zap className="w-4 h-4 text-cyan-400" /> 100% Data Confidentiality
               </span>
             </div>
           </div>
 
-          {/* Right Side — 5 cols: 3D Glassmorphic Showcase */}
+          {/* Right Side — 5 cols: 3D Showcase */}
           <div className={`lg:col-span-5 transition-all duration-1000 delay-300 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <div className="relative">
-              {/* Floating Orbiting 3D Badge (Top Right) */}
+              {/* Floating Orbiting 3D Clay Badge (Top Right) */}
               <div className="absolute -top-10 -right-6 z-30 animate-float hidden sm:block">
-                <div className="glass-card-3d p-3.5 rounded-2xl border border-white/25 flex items-center gap-3 shadow-[0_15px_35px_-5px_rgba(255,120,31,0.3)]">
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-orange-500 to-pink-500 flex items-center justify-center text-white shadow-md">
-                    <TrendingUp className="w-5 h-5" />
+                <div className="clay-card p-4 flex items-center gap-3 border border-white/25 shadow-2xl">
+                  <div className="clay-icon-bubble w-11 h-11 bg-gradient-to-br from-orange-500 via-amber-500 to-red-500 flex items-center justify-center text-white shadow-md">
+                    <TrendingUp className="w-5 h-5 drop-shadow-sm" />
                   </div>
                   <div>
-                    <p className="text-[11px] text-muted-foreground uppercase font-bold tracking-wider">Average ROAS</p>
-                    <p className="text-base font-extrabold text-foreground">3.8x Blended</p>
+                    <p className="text-[10px] text-muted-foreground uppercase font-black tracking-wider">Average ROAS</p>
+                    <p className="text-base font-black text-gradient-fire">3.8x Blended</p>
                   </div>
                 </div>
               </div>
 
-              {/* Floating Orbiting 3D Badge (Bottom Left) */}
+              {/* Floating Orbiting 3D Clay Badge (Bottom Left) */}
               <div className="absolute -bottom-8 -left-8 z-30 animate-float hidden sm:block" style={{ animationDelay: '3s' }}>
-                <div className="glass-card-3d p-3.5 rounded-2xl border border-white/25 flex items-center gap-3 shadow-[0_15px_35px_-5px_rgba(99,102,241,0.3)]">
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white shadow-md">
-                    <Sparkles className="w-5 h-5" />
+                <div className="clay-card p-4 flex items-center gap-3 border border-white/25 shadow-2xl">
+                  <div className="clay-icon-bubble w-11 h-11 bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center text-white shadow-md">
+                    <Sparkles className="w-5 h-5 drop-shadow-sm" />
                   </div>
                   <div>
-                    <p className="text-[11px] text-muted-foreground uppercase font-bold tracking-wider">Client Retention</p>
-                    <p className="text-base font-extrabold text-foreground">94% Over 6 Mo</p>
+                    <p className="text-[10px] text-muted-foreground uppercase font-black tracking-wider">Client Retention</p>
+                    <p className="text-base font-black text-gradient">98% Over 6 Mo</p>
                   </div>
                 </div>
               </div>
 
               {/* Main 3D Frosted Glass Dashboard Card */}
-              <div className="glass-card-3d rounded-3xl p-8 sm:p-9 space-y-7 relative overflow-hidden border border-white/20">
+              <div className="glass-card-3d rounded-3xl p-8 sm:p-9 space-y-7 relative overflow-hidden border border-white/20 shadow-2xl">
                 {/* Glowing Top Bevel Accent */}
                 <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-indigo-500 via-pink-500 to-orange-500 opacity-80" />
                 
@@ -213,35 +213,35 @@ const HeroSection = () => {
                   </div>
                 </div>
 
-                {/* Primary Growth Metric */}
-                <div className="space-y-2 p-5 rounded-2xl bg-white/[0.03] border border-white/10">
-                  <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                {/* Primary Growth Metric — 3D Claymorphic Panel */}
+                <div className="space-y-2 p-5 rounded-2xl clay-card border border-white/20">
+                  <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground font-poppins">
                     Total Audience Reached
                   </span>
                   <div className="text-4xl sm:text-5xl font-black font-poppins text-gradient">
                     <AnimatedCounter end={50} suffix="M+" />
                   </div>
-                  <p className="text-xs text-muted-foreground">
+                  <p className="text-xs text-muted-foreground font-light">
                     Targeted impressions across Meta, Google Search, YouTube & Reels
                   </p>
                 </div>
 
-                {/* Secondary Metrics 2x2 Grid */}
+                {/* Secondary Metrics 2x2 Grid — 3D Claymorphic Wells */}
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="p-4 rounded-xl bg-white/[0.03] border border-white/10">
-                    <span className="text-xs text-muted-foreground font-medium">Growth Campaigns</span>
-                    <div className="text-2xl sm:text-3xl font-extrabold text-foreground mt-1">
+                  <div className="p-4 rounded-2xl clay-card border border-white/15">
+                    <span className="text-xs text-muted-foreground font-semibold">Growth Campaigns</span>
+                    <div className="text-2xl sm:text-3xl font-black text-foreground mt-1">
                       <AnimatedCounter end={120} suffix="+" />
                     </div>
-                    <span className="text-[11px] text-emerald-400 mt-0.5 block">↑ Scaling actively</span>
+                    <span className="text-[11px] text-emerald-400 font-bold mt-0.5 block">↑ Scaling actively</span>
                   </div>
 
-                  <div className="p-4 rounded-xl bg-white/[0.03] border border-white/10">
-                    <span className="text-xs text-muted-foreground font-medium">Client Rating</span>
-                    <div className="text-2xl sm:text-3xl font-extrabold text-foreground mt-1">
+                  <div className="p-4 rounded-2xl clay-card border border-white/15">
+                    <span className="text-xs text-muted-foreground font-semibold">Client Rating</span>
+                    <div className="text-2xl sm:text-3xl font-black text-foreground mt-1">
                       <AnimatedCounter end={4} suffix=".9/5" />
                     </div>
-                    <span className="text-[11px] text-amber-400 mt-0.5 block">★ Verified reviews</span>
+                    <span className="text-[11px] text-amber-400 font-bold mt-0.5 block">★ Verified reviews</span>
                   </div>
                 </div>
 

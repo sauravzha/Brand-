@@ -13,6 +13,7 @@ import LoadingScreen from "@/components/LoadingScreen";
 import PageTransition from "@/components/PageTransition";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import CookieConsent from "@/components/CookieConsent";
+import WhatsAppWidget from "@/components/WhatsAppWidget";
 
 import Careers from "./pages/Careers";
 import Resources from "./pages/Resources";
@@ -68,6 +69,7 @@ const App = () => {
             <BrowserRouter>
               <AnimatedRoutes />
               <CookieConsent />
+              <WhatsAppWidget />
             </BrowserRouter>
           </ErrorBoundary>
         </TooltipProvider>

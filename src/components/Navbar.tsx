@@ -133,12 +133,23 @@ const Navbar = () => {
           </div>
 
           {/* Right Side Actions */}
-          <div className="hidden md:flex items-center gap-3">
+          <div className="hidden md:flex items-center gap-2.5">
+            <a
+              href="https://wa.me/919288419270?text=Hi%20BrandYatra!%20I'd%20like%20to%20discuss%20scaling%20my%20brand."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="clay-badge px-3.5 py-1.5 flex items-center gap-2 text-xs font-bold text-emerald-400 hover:text-emerald-300 border border-emerald-500/30 hover:border-emerald-500/60 transition-all hover:scale-105 active:scale-95 group cursor-pointer"
+              title="Chat directly on WhatsApp"
+            >
+              <span className="skeuo-led-green" />
+              <span>WhatsApp Desk</span>
+            </a>
+
             <ModeToggle />
             <Button
               onClick={() => scrollToSection("contact")}
               size="sm"
-              className="btn-3d-gradient text-white font-semibold text-xs rounded-full px-5 py-2.5 border border-white/20"
+              className="skeuo-btn text-white font-semibold text-xs rounded-full px-5 py-2.5"
             >
               <span className="flex items-center gap-1.5">
                 Get in Touch
@@ -207,10 +218,21 @@ const Navbar = () => {
             </button>
           </div>
           
-          <div className="pt-6 border-t border-border/30">
+          <div className="pt-6 border-t border-border/30 space-y-3">
+            <a
+              href="https://wa.me/919288419270?text=Hi%20BrandYatra!%20I'd%20like%20to%20discuss%20scaling%20my%20brand."
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="w-full skeuo-btn-emerald py-4 px-5 rounded-xl flex items-center justify-center gap-2.5 text-white font-bold text-base shadow-lg"
+            >
+              <span className="skeuo-led-green" />
+              <span>Chat on WhatsApp (Instant Reply)</span>
+            </a>
+
             <Button
               onClick={() => scrollToSection("contact")}
-              className="w-full bg-gradient-to-r from-primary via-pink-500 to-orange-500 hover:shadow-lg hover:shadow-primary/30 py-6 text-lg rounded-xl"
+              className="w-full skeuo-btn py-6 text-lg rounded-xl text-white"
             >
               Start a project
               <ArrowRight className="ml-2 w-5 h-5" />

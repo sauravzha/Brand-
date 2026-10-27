@@ -1,4 +1,4 @@
-import { Instagram, Linkedin, Youtube, Facebook, Mail, ArrowUpRight, Heart, Sparkles } from "lucide-react";
+import { Instagram, Linkedin, Youtube, Facebook, Mail, ArrowUpRight, Heart, Sparkles, MessageSquare } from "lucide-react";
 import logo from "@/assets/brandyatra-logo.png";
 import { Link } from "react-router-dom";
 
@@ -18,8 +18,7 @@ const footerLinks = {
     { label: "Careers", to: "/careers" },
   ],
   resources: [
-    { label: "Free SOPs & Playbooks", href: "#resources" },
-    { label: "FAQ", href: "#faq" },
+    { label: "FAQ & Answers", href: "#faq" },
     { label: "Privacy Policy", to: "/privacy-policy" },
     { label: "Terms of Service", to: "/terms-and-conditions" },
   ],
@@ -84,8 +83,18 @@ const Footer = () => {
               A high-precision creative marketing studio engineering exponential customer acquisition for ambitious startups and modern brands.
             </p>
             
-            {/* 3D Social Links */}
-            <div className="flex items-center gap-3 pt-1">
+            {/* 3D Social & WhatsApp Links */}
+            <div className="flex items-center gap-2.5 pt-1">
+              <a
+                href="https://wa.me/919288419270?text=Hi%20BrandYatra!%20I'd%20like%20to%20discuss%20scaling%20my%20brand."
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Direct WhatsApp Channel"
+                className="clay-whatsapp w-10 h-10 flex items-center justify-center text-white transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer"
+                title="Direct WhatsApp Channel"
+              >
+                <MessageSquare className="w-4 h-4 fill-white" />
+              </a>
               {socialLinks.map((social) => {
                 const Icon = social.icon;
                 return (
@@ -185,15 +194,29 @@ const Footer = () => {
               ))}
             </ul>
 
-            {/* Direct Email */}
-            <div className="mt-6 pt-4 border-t border-white/[0.08]">
+            {/* Direct WhatsApp & Email */}
+            <div className="mt-6 pt-4 border-t border-white/[0.08] space-y-2">
               <a 
-                href="mailto:hello.brandyatra@gmail.com" 
-                className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary/90 hover:text-primary transition-colors group"
+                href="https://wa.me/919288419270?text=Hi%20BrandYatra!%20I'd%20like%20to%20discuss%20scaling%20my%20brand." 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-xs font-bold text-emerald-400 hover:text-emerald-300 transition-colors group"
+                title="Direct WhatsApp Channel"
               >
-                <span>hello.brandyatra@gmail.com</span>
-                <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                <span className="skeuo-led-green" />
+                <span>Direct WhatsApp Channel</span>
+                <ArrowUpRight className="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </a>
+
+              <div>
+                <a 
+                  href="mailto:hello.brandyatra@gmail.com" 
+                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary/90 hover:text-primary transition-colors group"
+                >
+                  <span>hello.brandyatra@gmail.com</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                </a>
+              </div>
             </div>
           </div>
         </div>

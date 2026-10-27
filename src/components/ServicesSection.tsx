@@ -433,7 +433,7 @@ const ServicesSection = () => {
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-white/[0.06] border border-white/10 text-[10px] font-semibold text-muted-foreground">
+                    <div className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full clay-badge text-[10px] font-bold text-muted-foreground border border-white/10">
                       <span className={`w-1.5 h-1.5 rounded-full ${pillar.beacon} animate-pulse`} />
                       <span>{pillar.badge}</span>
                     </div>
@@ -464,7 +464,7 @@ const ServicesSection = () => {
           transition={{ duration: 0.5 }}
           className="flex items-center justify-center mb-12 sm:mb-16"
         >
-          <div className="glass-card-3d p-1.5 sm:p-2 rounded-2xl border border-white/15 flex flex-wrap gap-1.5 sm:gap-2 justify-center shadow-2xl backdrop-blur-2xl">
+          <div className="neumorphic-well p-1.5 sm:p-2 rounded-2xl flex flex-wrap gap-1.5 sm:gap-2 justify-center shadow-2xl backdrop-blur-2xl">
             {categories.map((cat) => {
               const Icon = cat.icon;
               const isActive = selectedCategory === cat.id;
@@ -474,8 +474,8 @@ const ServicesSection = () => {
                   onClick={() => setSelectedCategory(cat.id)}
                   className={`inline-flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 cursor-pointer ${
                     isActive
-                      ? "btn-3d-gradient text-white shadow-lg scale-105"
-                      : "text-muted-foreground hover:text-foreground hover:bg-white/[0.05]"
+                      ? "skeuo-btn text-white shadow-lg scale-105"
+                      : "text-muted-foreground hover:text-foreground hover:bg-white/[0.05] active:scale-95"
                   }`}
                 >
                   <Icon className={`w-3.5 h-3.5 ${isActive ? "text-white" : "text-primary"}`} />

@@ -18,8 +18,6 @@ const AboutSection = lazy(() => import("@/components/AboutSection"));
 const PricingSection = lazy(() => import("@/components/PricingSection"));
 const FAQSection = lazy(() => import("@/components/FAQSection"));
 const SocialMediaFeed = lazy(() => import("@/components/SocialMediaFeed"));
-const FreeResources = lazy(() => import("@/components/FreeResources"));
-const NewsletterSection = lazy(() => import("@/components/NewsletterSection"));
 const ContactSection = lazy(() => import("@/components/ContactSection"));
 
 const SectionSpinner = () => (
@@ -74,13 +72,7 @@ const Index = () => {
           {/* 13. Behind The Scenes & Live Experiments */}
           <SocialMediaFeed />
 
-          {/* 14. Downloadable SOPs & Toolkits */}
-          <FreeResources />
-
-          {/* 15. Newsletter Subscription */}
-          <NewsletterSection />
-
-          {/* 16. Final High-Intent Audit Booking */}
+          {/* 14. Final High-Intent Audit Booking */}
           <ContactSection />
         </Suspense>
       </main>
