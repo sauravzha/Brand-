@@ -3,7 +3,7 @@ import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import { useState } from "react";
 import { toast } from "sonner";
-import { Loader2, ArrowRight, Mail, MapPin, Clock } from "lucide-react";
+import { Loader2, ArrowRight, Mail, MapPin, Clock, Sparkles } from "lucide-react";
 
 interface FormErrors {
   name?: string;
@@ -62,7 +62,7 @@ const ContactSection = () => {
       await new Promise(resolve => setTimeout(resolve, 1500));
       
       toast.success("Message sent successfully! 🎉", {
-        description: "We'll get back to you within 24-48 hours"
+        description: "We'll get back to you within 24 hours"
       });
       
       setFormData({ name: "", email: "", business: "", message: "" });
@@ -94,10 +94,10 @@ const ContactSection = () => {
 
   return (
     <section id="contact" className="py-24 sm:py-36 relative overflow-hidden">
-      {/* Background */}
+      {/* 3D Atmospheric Glowing Ambient Orbs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute bottom-0 left-0 w-80 h-80 bg-accent/[0.04] rounded-full blur-[100px]" />
-        <div className="absolute top-0 right-0 w-80 h-80 bg-primary/[0.04] rounded-full blur-[100px]" />
+        <div className="absolute bottom-0 left-[-10%] w-[550px] h-[550px] bg-gradient-to-tr from-pink-600/15 via-orange-600/10 to-transparent rounded-full blur-[130px]" />
+        <div className="absolute top-0 right-[-10%] w-[550px] h-[550px] bg-gradient-to-br from-indigo-600/15 via-purple-600/10 to-transparent rounded-full blur-[130px]" />
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -106,79 +106,80 @@ const ContactSection = () => {
             {/* Left: Info */}
             <div className="lg:col-span-5 space-y-8">
               <div className="space-y-4">
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-border bg-muted/50 text-xs font-medium text-muted-foreground uppercase tracking-widest">
-                  Contact
+                <div className="glass-pill-3d inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold tracking-widest uppercase">
+                  <Sparkles className="w-3.5 h-3.5 text-primary" />
+                  <span className="text-foreground/90">Get In Touch</span>
                 </div>
                 <h2 className="text-4xl sm:text-5xl font-bold font-poppins tracking-tight leading-[1.1]">
-                  Let's build<br />
-                  something <span className="text-gradient">great</span>
+                  Let's engineer<br />
+                  something <span className="text-gradient">extraordinary</span>
                 </h2>
-                <p className="text-base text-muted-foreground leading-relaxed">
-                  Tell us about your project and we'll get back to you within 24 hours with a free consultation.
+                <p className="text-base text-muted-foreground leading-relaxed font-light">
+                  Tell us about your brand vision and margins. We'll respond with a free audited growth proposal within 24 hours.
                 </p>
               </div>
 
-              {/* Contact Details */}
-              <div className="space-y-4 pt-4">
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-lg border border-border/50 flex items-center justify-center flex-shrink-0">
-                    <Mail className="w-4 h-4 text-muted-foreground" />
+              {/* 3D Contact Details */}
+              <div className="space-y-4 pt-2">
+                <div className="glass-card-3d p-4 rounded-xl flex items-center gap-4 border border-white/10 hover:border-primary/40 transition-colors">
+                  <div className="w-11 h-11 rounded-lg bg-gradient-to-br from-indigo-500/20 to-purple-500/20 border border-indigo-500/30 flex items-center justify-center flex-shrink-0 text-indigo-400">
+                    <Mail className="w-5 h-5" />
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-foreground mb-0.5">Email us</p>
-                    <a href="mailto:hello.brandyatra@gmail.com" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                    <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-0.5">Email direct</p>
+                    <a href="mailto:hello.brandyatra@gmail.com" className="text-sm font-semibold text-foreground hover:text-primary transition-colors">
                       hello.brandyatra@gmail.com
                     </a>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-lg border border-border/50 flex items-center justify-center flex-shrink-0">
-                    <Clock className="w-4 h-4 text-muted-foreground" />
+                <div className="glass-card-3d p-4 rounded-xl flex items-center gap-4 border border-white/10 hover:border-primary/40 transition-colors">
+                  <div className="w-11 h-11 rounded-lg bg-gradient-to-br from-pink-500/20 to-rose-500/20 border border-pink-500/30 flex items-center justify-center flex-shrink-0 text-pink-400">
+                    <Clock className="w-5 h-5" />
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-foreground mb-0.5">Response time</p>
-                    <p className="text-sm text-muted-foreground">Within 24-48 hours</p>
+                    <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-0.5">Response SLA</p>
+                    <p className="text-sm font-semibold text-foreground">Under 6 hours on business days</p>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-lg border border-border/50 flex items-center justify-center flex-shrink-0">
-                    <MapPin className="w-4 h-4 text-muted-foreground" />
+                <div className="glass-card-3d p-4 rounded-xl flex items-center gap-4 border border-white/10 hover:border-primary/40 transition-colors">
+                  <div className="w-11 h-11 rounded-lg bg-gradient-to-br from-emerald-500/20 to-teal-500/20 border border-emerald-500/30 flex items-center justify-center flex-shrink-0 text-emerald-400">
+                    <MapPin className="w-5 h-5" />
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-foreground mb-0.5">Based in</p>
-                    <p className="text-sm text-muted-foreground">India — working globally</p>
+                    <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-0.5">Headquarters</p>
+                    <p className="text-sm font-semibold text-foreground">India — scaling brands globally</p>
                   </div>
                 </div>
               </div>
 
-              {/* Social proof */}
-              <div className="border border-border/40 rounded-xl p-5 bg-card/30">
-                <div className="flex items-center gap-2 mb-2">
+              {/* 3D Social proof */}
+              <div className="glass-card-3d p-6 rounded-2xl border border-white/10">
+                <div className="flex items-center gap-3 mb-2">
                   <div className="flex -space-x-2">
                     {[1, 2, 3, 4].map((i) => (
-                      <div key={i} className="w-7 h-7 rounded-full bg-gradient-to-br from-primary/60 to-accent/60 border-2 border-background flex items-center justify-center text-[10px] text-white font-bold">
+                      <div key={i} className="w-8 h-8 rounded-full bg-gradient-to-br from-primary via-purple-500 to-pink-500 border-2 border-slate-950 flex items-center justify-center text-[10px] text-white font-extrabold shadow-md">
                         {['S', 'A', 'R', 'P'][i-1]}
                       </div>
                     ))}
                   </div>
-                  <span className="text-xs text-muted-foreground ml-1">Join 50+ happy clients</span>
+                  <span className="text-xs font-semibold text-foreground">Trusted by 50+ Modern Founders</span>
                 </div>
-                <p className="text-xs text-muted-foreground">
-                  Average response within 6 hours · Free initial consultation
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  Average initial call duration 25 mins · Custom performance model included
                 </p>
               </div>
             </div>
 
-            {/* Right: Form */}
+            {/* Right: 3D Form Card */}
             <div className="lg:col-span-7">
-              <div className="border border-border/60 bg-card/30 backdrop-blur-sm p-7 sm:p-10 rounded-2xl">
+              <div className="glass-card-3d p-7 sm:p-10 rounded-2xl border border-white/10 relative">
                 <form onSubmit={handleSubmit} className="space-y-5">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div className="space-y-1.5">
-                      <label htmlFor="name" className="text-sm font-medium text-foreground">
-                        Name *
+                      <label htmlFor="name" className="text-xs font-semibold uppercase tracking-wider text-foreground/80">
+                        Your Name *
                       </label>
                       <Input
                         id="name"
@@ -186,8 +187,8 @@ const ContactSection = () => {
                         value={formData.name}
                         onChange={handleChange}
                         required
-                        placeholder="Your full name"
-                        className={`border-border/50 focus:border-primary bg-background/50 transition-all duration-300 h-11 ${
+                        placeholder="Saurav Jha"
+                        className={`border-white/10 focus:border-primary/80 focus:ring-2 focus:ring-primary/30 bg-white/[0.04] backdrop-blur-md transition-all duration-300 h-12 text-sm text-foreground rounded-xl ${
                           errors.name ? 'border-destructive' : ''
                         }`}
                       />
@@ -196,8 +197,8 @@ const ContactSection = () => {
                       )}
                     </div>
                     <div className="space-y-1.5">
-                      <label htmlFor="email" className="text-sm font-medium text-foreground">
-                        Email *
+                      <label htmlFor="email" className="text-xs font-semibold uppercase tracking-wider text-foreground/80">
+                        Email Address *
                       </label>
                       <Input
                         id="email"
@@ -206,8 +207,8 @@ const ContactSection = () => {
                         value={formData.email}
                         onChange={handleChange}
                         required
-                        placeholder="you@company.com"
-                        className={`border-border/50 focus:border-primary bg-background/50 transition-all duration-300 h-11 ${
+                        placeholder="founder@company.com"
+                        className={`border-white/10 focus:border-primary/80 focus:ring-2 focus:ring-primary/30 bg-white/[0.04] backdrop-blur-md transition-all duration-300 h-12 text-sm text-foreground rounded-xl ${
                           errors.email ? 'border-destructive' : ''
                         }`}
                       />
@@ -218,22 +219,22 @@ const ContactSection = () => {
                   </div>
 
                   <div className="space-y-1.5">
-                    <label htmlFor="business" className="text-sm font-medium text-foreground">
-                      Business / Brand
+                    <label htmlFor="business" className="text-xs font-semibold uppercase tracking-wider text-foreground/80">
+                      Brand / Website / Store URL
                     </label>
                     <Input
                       id="business"
                       name="business"
                       value={formData.business}
                       onChange={handleChange}
-                      placeholder="Your business name"
-                      className="border-border/50 focus:border-primary bg-background/50 transition-all duration-300 h-11"
+                      placeholder="e.g. yourstore.com or @yourinstagram"
+                      className="border-white/10 focus:border-primary/80 focus:ring-2 focus:ring-primary/30 bg-white/[0.04] backdrop-blur-md transition-all duration-300 h-12 text-sm text-foreground rounded-xl"
                     />
                   </div>
 
                   <div className="space-y-1.5">
-                    <label htmlFor="message" className="text-sm font-medium text-foreground">
-                      Tell us about your project *
+                    <label htmlFor="message" className="text-xs font-semibold uppercase tracking-wider text-foreground/80">
+                      Tell us about your targets & current ad spend *
                     </label>
                     <Textarea
                       id="message"
@@ -241,35 +242,37 @@ const ContactSection = () => {
                       value={formData.message}
                       onChange={handleChange}
                       required
-                      placeholder="What are you looking to achieve? What's your timeline and budget range?"
+                      placeholder="What is your target revenue, monthly ad spend, or current ROAS bottleneck?"
                       rows={5}
                       maxLength={500}
-                      className={`border-border/50 focus:border-primary bg-background/50 transition-all duration-300 resize-none ${
+                      className={`border-white/10 focus:border-primary/80 focus:ring-2 focus:ring-primary/30 bg-white/[0.04] backdrop-blur-md transition-all duration-300 resize-none text-sm text-foreground rounded-xl ${
                         errors.message ? 'border-destructive' : ''
                       }`}
                     />
-                    {errors.message && (
-                      <p className="text-xs text-destructive">{errors.message}</p>
-                    )}
-                    <p className={`text-xs ${formData.message.length > 450 ? 'text-amber-500' : 'text-muted-foreground'}`}>
-                      {formData.message.length} / 500
-                    </p>
+                    <div className="flex justify-between items-center pt-1">
+                      {errors.message ? (
+                        <p className="text-xs text-destructive">{errors.message}</p>
+                      ) : <span />}
+                      <p className={`text-xs ${formData.message.length > 450 ? 'text-amber-500' : 'text-muted-foreground'}`}>
+                        {formData.message.length} / 500
+                      </p>
+                    </div>
                   </div>
 
                   <Button
                     type="submit"
                     size="lg"
                     disabled={isSubmitting}
-                    className="w-full sm:w-auto bg-gradient-to-r from-primary via-pink-500 to-orange-500 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300 text-base px-8 py-5 rounded-xl group disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="btn-3d-gradient w-full sm:w-auto text-sm font-semibold px-9 py-5 rounded-xl text-white group disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {isSubmitting ? (
                       <>
                         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        Sending...
+                        Transmitting...
                       </>
                     ) : (
                       <>
-                        Send message
+                        <span>Submit Growth Inquiry</span>
                         <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                       </>
                     )}

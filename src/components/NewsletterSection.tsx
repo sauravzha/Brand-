@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Send, CheckCircle2, ArrowRight } from "lucide-react";
+import { Send, CheckCircle2, ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import FadeIn from "./FadeIn";
@@ -15,66 +15,64 @@ const NewsletterSection = () => {
             setTimeout(() => {
                 setIsSubscribed(true);
                 setEmail("");
-            }, 1000);
+            }, 800);
         }
     };
 
     return (
         <section id="newsletter" className="py-20 sm:py-28 relative overflow-hidden">
+            {/* 3D Atmospheric Glowing Ambient Light */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-gradient-to-r from-purple-600/15 via-pink-600/10 to-indigo-600/15 rounded-full blur-[140px]" />
+            </div>
+
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <FadeIn direction="up">
-                    <div className="max-w-3xl mx-auto rounded-2xl border border-border/60 bg-gradient-to-br from-primary/5 via-card/50 to-accent/5 p-8 sm:p-12 md:p-14 text-center relative overflow-hidden">
-                        {/* Decorative elements */}
-                        <div className="absolute top-0 right-0 w-40 h-40 bg-primary/[0.05] rounded-full blur-[60px] pointer-events-none" />
-                        <div className="absolute bottom-0 left-0 w-40 h-40 bg-accent/[0.05] rounded-full blur-[60px] pointer-events-none" />
-
+                    <div className="glass-card-3d max-w-3xl mx-auto rounded-3xl p-8 sm:p-12 md:p-14 text-center relative border border-white/15">
                         <div className="relative z-10">
-                            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-primary/20 bg-primary/5 text-xs font-medium text-primary mb-6 tracking-wide">
-                                <span className="relative flex h-1.5 w-1.5">
-                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                                    <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-primary"></span>
-                                </span>
-                                Weekly newsletter
+                            <div className="glass-pill-3d inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold tracking-widest uppercase mb-6">
+                                <Sparkles className="w-3.5 h-3.5 text-primary" />
+                                <span className="text-foreground/90">The Friday Growth Dispatch</span>
                             </div>
 
                             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-poppins mb-4 tracking-tight">
                                 Get the <span className="text-gradient">growth playbook</span>
                             </h2>
 
-                            <p className="text-muted-foreground text-base mb-8 max-w-lg mx-auto">
-                                Join 10,000+ founders receiving our weekly tips on scaling brands with actionable digital marketing strategies.
+                            <p className="text-muted-foreground text-base mb-8 max-w-lg mx-auto font-light leading-relaxed">
+                                Join 10,000+ founders receiving our weekly confidential teardowns on scaling DTC, SaaS, and modern brands.
                             </p>
 
                             {isSubscribed ? (
                                 <div className="flex flex-col items-center justify-center space-y-3">
-                                    <div className="w-12 h-12 bg-green-500/10 rounded-full flex items-center justify-center">
-                                        <CheckCircle2 className="w-6 h-6 text-green-500" />
+                                    <div className="w-14 h-14 bg-emerald-500/20 border border-emerald-500/40 rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(16,185,129,0.3)]">
+                                        <CheckCircle2 className="w-7 h-7 text-emerald-400" />
                                     </div>
-                                    <h3 className="text-xl font-bold">You're in!</h3>
-                                    <p className="text-sm text-muted-foreground">Check your inbox for your free Growth Checklist.</p>
+                                    <h3 className="text-xl font-bold text-foreground font-poppins">You're in! 🎉</h3>
+                                    <p className="text-sm text-muted-foreground">Check your inbox for your instant Growth Audit SOP.</p>
                                 </div>
                             ) : (
                                 <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
                                     <Input
                                         type="email"
-                                        placeholder="you@company.com"
-                                        className="h-11 bg-background/80 border-border/50 focus:border-primary text-sm flex-1"
+                                        placeholder="founder@company.com"
+                                        className="h-12 bg-white/[0.04] backdrop-blur-md border-white/15 focus:border-primary/80 focus:ring-2 focus:ring-primary/30 text-sm flex-1 rounded-xl text-foreground"
                                         value={email}
                                         onChange={(e) => setEmail(e.target.value)}
                                         required
                                     />
                                     <Button
                                         type="submit"
-                                        className="h-11 px-6 bg-gradient-to-r from-primary via-pink-500 to-orange-500 hover:shadow-lg hover:shadow-primary/30 transition-all duration-300 group"
+                                        className="btn-3d-gradient h-12 px-7 rounded-xl text-sm font-semibold text-white group"
                                     >
-                                        Subscribe
-                                        <ArrowRight className="ml-1.5 w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+                                        <span>Subscribe</span>
+                                        <ArrowRight className="ml-1.5 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                                     </Button>
                                 </form>
                             )}
 
-                            <p className="text-xs text-muted-foreground/60 mt-5">
-                                No spam, ever. Unsubscribe at any time.
+                            <p className="text-xs text-muted-foreground/70 mt-5">
+                                Zero spam. High-signal growth breakdowns only. One-click unsubscribe.
                             </p>
                         </div>
                     </div>
@@ -85,3 +83,4 @@ const NewsletterSection = () => {
 };
 
 export default NewsletterSection;
+

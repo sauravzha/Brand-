@@ -86,7 +86,7 @@ const Navbar = () => {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled 
-          ? "glass-effect shadow-sm" 
+          ? "bg-background/70 backdrop-blur-2xl border-b border-white/10 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.5)]" 
           : "bg-transparent"
       }`}
     >
@@ -95,11 +95,14 @@ const Navbar = () => {
           {/* Logo */}
           <button 
             onClick={() => scrollToSection("hero")} 
-            className="flex-shrink-0 flex items-center gap-2 group"
+            className="flex-shrink-0 flex items-center gap-2.5 group"
           >
-            <img src={logo} alt="Brandयात्रा Logo" className="h-10 sm:h-12 w-auto transition-transform duration-300 group-hover:scale-105" />
-            <div className="hidden sm:block">
-              <span className="text-lg font-bold font-poppins">
+            <div className="relative">
+              <div className="absolute inset-0 bg-primary/30 rounded-xl blur-md scale-95 opacity-0 group-hover:opacity-100 transition-opacity" />
+              <img src={logo} alt="Brandयात्रा Logo" className="h-10 sm:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105 relative z-10" />
+            </div>
+            <div className="hidden sm:block text-left">
+              <span className="text-lg font-bold font-poppins tracking-tight block">
                 <span className="text-gradient">Brand</span>
                 <span className="text-foreground">यात्रा</span>
               </span>
@@ -107,7 +110,7 @@ const Navbar = () => {
           </button>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center gap-1">
+          <div className="hidden md:flex items-center gap-1 p-1 rounded-full bg-white/[0.03] border border-white/10 backdrop-blur-xl shadow-inner">
             {navLinks.map((link) => {
               const isActive = link.type === "scroll" 
                 ? isHomePage && activeSection === link.id
@@ -117,16 +120,13 @@ const Navbar = () => {
                 <button
                   key={link.label}
                   onClick={() => handleNavClick(link)}
-                  className={`relative px-4 py-2 text-sm font-medium transition-all duration-300 rounded-lg ${
+                  className={`relative px-4 py-2 text-xs font-semibold uppercase tracking-wider transition-all duration-300 rounded-full ${
                     isActive
-                      ? "text-primary"
-                      : "text-foreground/60 hover:text-foreground hover:bg-foreground/5"
+                      ? "text-white bg-gradient-to-r from-primary/30 via-pink-500/20 to-orange-500/20 border border-white/20 shadow-sm"
+                      : "text-foreground/70 hover:text-foreground hover:bg-white/5"
                   }`}
                 >
                   {link.label}
-                  {isActive && (
-                    <span className="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-5 h-0.5 rounded-full bg-primary" />
-                  )}
                 </button>
               );
             })}
@@ -138,11 +138,11 @@ const Navbar = () => {
             <Button
               onClick={() => scrollToSection("contact")}
               size="sm"
-              className="relative overflow-hidden group bg-gradient-to-r from-primary via-pink-500 to-orange-500 hover:shadow-lg hover:shadow-primary/30 transition-all duration-300 rounded-lg px-5"
+              className="btn-3d-gradient text-white font-semibold text-xs rounded-full px-5 py-2.5 border border-white/20"
             >
-              <span className="relative z-10 flex items-center gap-1.5">
+              <span className="flex items-center gap-1.5">
                 Get in Touch
-                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                <ArrowRight className="w-3.5 h-3.5" />
               </span>
             </Button>
           </div>

@@ -1,5 +1,5 @@
 import { Button } from "./ui/button";
-import { ArrowRight, Play } from "lucide-react";
+import { ArrowRight, Play, Sparkles, TrendingUp, ShieldCheck, Zap } from "lucide-react";
 import { useEffect, useState, useRef } from "react";
 import logo from "@/assets/brandyatra-logo.png";
 
@@ -64,53 +64,62 @@ const HeroSection = () => {
   };
 
   return (
-    <section id="hero" className="relative min-h-screen flex items-center overflow-hidden pt-24 pb-16">
-      {/* Ambient Background — reduced from 3 blobs to 2, more organic placement */}
+    <section id="hero" className="relative min-h-[95vh] flex items-center justify-center pt-28 pb-20 overflow-hidden">
+      {/* 3D Atmospheric Background Glows */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div 
-          className="absolute -top-24 -right-24 w-[500px] h-[500px] rounded-full blur-[120px] animate-float opacity-60"
-          style={{ background: 'radial-gradient(circle, hsl(258 90% 66% / 0.25), transparent 70%)' }}
+          className="absolute -top-32 -left-32 w-[600px] h-[600px] rounded-full blur-[140px] opacity-60 animate-float"
+          style={{ background: 'radial-gradient(circle, rgba(99, 102, 241, 0.4), transparent 70%)' }}
         />
         <div 
-          className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full blur-[100px] animate-float opacity-40"
-          style={{ background: 'radial-gradient(circle, hsl(187 100% 50% / 0.2), transparent 70%)', animationDelay: '3s' }}
+          className="absolute top-1/4 -right-24 w-[650px] h-[650px] rounded-full blur-[150px] opacity-50 animate-float"
+          style={{ background: 'radial-gradient(circle, rgba(255, 120, 31, 0.35), transparent 70%)', animationDelay: '2.5s' }}
         />
-        {/* Subtle dot grid pattern */}
         <div 
-          className="absolute inset-0 opacity-[0.03]"
-          style={{ backgroundImage: 'radial-gradient(circle, hsl(var(--foreground)) 1px, transparent 1px)', backgroundSize: '32px 32px' }}
+          className="absolute -bottom-24 left-1/3 w-[500px] h-[500px] rounded-full blur-[130px] opacity-40 animate-float"
+          style={{ background: 'radial-gradient(circle, rgba(236, 72, 153, 0.3), transparent 70%)', animationDelay: '4s' }}
+        />
+        {/* Subtle Cyber Grid */}
+        <div 
+          className="absolute inset-0 opacity-[0.04]"
+          style={{ 
+            backgroundImage: 'linear-gradient(to right, rgba(255,255,255,0.15) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.15) 1px, transparent 1px)', 
+            backgroundSize: '48px 48px' 
+          }}
         />
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           {/* Left Content — 7 cols */}
           <div className={`lg:col-span-7 space-y-8 transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            {/* Eyebrow badge */}
-            <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-primary/20 bg-primary/5 backdrop-blur-sm">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+            {/* 3D Glass Pill Eyebrow */}
+            <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full glass-pill-3d border border-white/20">
+              <span className="relative flex h-2.5 w-2.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-500 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-gradient-to-r from-orange-500 to-pink-500"></span>
               </span>
-              <span className="text-sm font-medium text-primary tracking-wide">Now accepting new clients for 2026</span>
+              <span className="text-xs sm:text-sm font-semibold tracking-wide text-foreground/90">
+                Performance Marketing & Brand Architecture
+              </span>
             </div>
 
-            {/* Headline — editorial style, not the generic "Transforming X into Y" */}
+            {/* Headline with 3D gradient text */}
             <div className="space-y-2">
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold font-poppins tracking-tight leading-[1.1]">
+              <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold font-poppins tracking-tight leading-[1.08] text-foreground">
                 We build brands
               </h1>
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold font-poppins tracking-tight leading-[1.1]">
+              <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold font-poppins tracking-tight leading-[1.08] text-foreground">
                 that people
               </h1>
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold font-poppins tracking-tight leading-[1.1] text-gradient">
+              <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold font-poppins tracking-tight leading-[1.08] text-gradient">
                 actually remember.
               </h1>
             </div>
 
-            {/* Sub-headline — conversational, not corporate */}
-            <p className="text-lg sm:text-xl text-muted-foreground max-w-xl leading-relaxed">
-              Brandयात्रा is a creative marketing studio that helps startups cut through the noise with strategy, design, and storytelling that converts.
+            {/* Sub-headline */}
+            <p className="text-base sm:text-xl text-muted-foreground max-w-xl leading-relaxed">
+              Brandयात्रा crafts high-converting digital acquisition pipelines, thumb-stopping creative campaigns, and sustainable unit economics for ambitious startups.
             </p>
 
             {/* CTA Row */}
@@ -118,84 +127,142 @@ const HeroSection = () => {
               <Button
                 onClick={handleContactClick}
                 size="lg"
-                className="bg-gradient-to-r from-primary via-pink-500 to-orange-500 hover:shadow-xl hover:shadow-primary/30 transition-all duration-500 text-base sm:text-lg px-8 py-6 rounded-xl group"
+                className="btn-3d-gradient text-white text-base sm:text-lg font-bold px-8 py-6 rounded-2xl border border-white/30 group"
               >
-                Start a project
-                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1.5 transition-transform duration-300" />
+                <span>Schedule Growth Audit</span>
+                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Button>
               <button
                 onClick={handleServicesClick}
-                className="inline-flex items-center gap-3 text-foreground/70 hover:text-foreground transition-colors duration-300 group text-base sm:text-lg"
+                className="inline-flex items-center gap-3 px-6 py-4 rounded-2xl glass-card-3d text-foreground/90 hover:text-foreground transition-all duration-300 group text-sm sm:text-base font-semibold"
               >
-                <span className="w-12 h-12 rounded-full border-2 border-foreground/20 group-hover:border-primary/50 flex items-center justify-center transition-all duration-300 group-hover:scale-105">
-                  <Play className="w-4 h-4 ml-0.5 text-foreground/50 group-hover:text-primary transition-colors" />
+                <span className="w-9 h-9 rounded-full bg-primary/20 border border-primary/40 flex items-center justify-center transition-all duration-300 group-hover:scale-110 shadow-sm">
+                  <Play className="w-3.5 h-3.5 ml-0.5 text-primary" />
                 </span>
-                See what we do
+                <span>Explore Capabilities</span>
               </button>
+            </div>
+
+            {/* Trust Micro-Row */}
+            <div className="pt-2 flex flex-wrap items-center gap-6 text-xs text-muted-foreground font-medium">
+              <span className="flex items-center gap-1.5">
+                <ShieldCheck className="w-4 h-4 text-emerald-400" /> Meta & Google Certified
+              </span>
+              <span className="flex items-center gap-1.5">
+                <TrendingUp className="w-4 h-4 text-orange-400" /> ₹10Cr+ Ad Spend Managed
+              </span>
+              <span className="flex items-center gap-1.5">
+                <Zap className="w-4 h-4 text-cyan-400" /> 100% Data Confidentiality
+              </span>
             </div>
           </div>
 
-          {/* Right Side — 5 cols: logo + metrics card */}
+          {/* Right Side — 5 cols: 3D Glassmorphic Showcase */}
           <div className={`lg:col-span-5 transition-all duration-1000 delay-300 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <div className="relative">
-              {/* Floating logo with glow */}
-              <div className="flex justify-center mb-8 lg:mb-0 lg:absolute lg:-top-16 lg:right-8 z-20">
-                <div className="relative animate-float">
-                  <div className="absolute inset-0 bg-primary/20 rounded-full blur-2xl scale-150" />
-                  <img 
-                    src={logo} 
-                    alt="Brandयात्रा Logo" 
-                    className="h-28 w-28 sm:h-36 sm:w-36 object-contain relative z-10 p-1" 
-                    style={{ filter: 'drop-shadow(0 10px 25px hsl(var(--primary) / 0.35))' }}
-                  />
+              {/* Floating Orbiting 3D Badge (Top Right) */}
+              <div className="absolute -top-10 -right-6 z-30 animate-float hidden sm:block">
+                <div className="glass-card-3d p-3.5 rounded-2xl border border-white/25 flex items-center gap-3 shadow-[0_15px_35px_-5px_rgba(255,120,31,0.3)]">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-orange-500 to-pink-500 flex items-center justify-center text-white shadow-md">
+                    <TrendingUp className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <p className="text-[11px] text-muted-foreground uppercase font-bold tracking-wider">Average ROAS</p>
+                    <p className="text-base font-extrabold text-foreground">3.8x Blended</p>
+                  </div>
                 </div>
               </div>
 
-              {/* Metrics card — modern glassmorphic dashboard feel */}
-              <div className="glass-effect rounded-3xl p-8 space-y-6 relative overflow-hidden">
-                {/* Decorative corner accent */}
-                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-primary/10 to-transparent rounded-bl-[4rem]" />
+              {/* Floating Orbiting 3D Badge (Bottom Left) */}
+              <div className="absolute -bottom-8 -left-8 z-30 animate-float hidden sm:block" style={{ animationDelay: '3s' }}>
+                <div className="glass-card-3d p-3.5 rounded-2xl border border-white/25 flex items-center gap-3 shadow-[0_15px_35px_-5px_rgba(99,102,241,0.3)]">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white shadow-md">
+                    <Sparkles className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <p className="text-[11px] text-muted-foreground uppercase font-bold tracking-wider">Client Retention</p>
+                    <p className="text-base font-extrabold text-foreground">94% Over 6 Mo</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Main 3D Frosted Glass Dashboard Card */}
+              <div className="glass-card-3d rounded-3xl p-8 sm:p-9 space-y-7 relative overflow-hidden border border-white/20">
+                {/* Glowing Top Bevel Accent */}
+                <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-indigo-500 via-pink-500 to-orange-500 opacity-80" />
                 
-                <div className="flex items-center gap-3 mb-2">
-                  <div className="w-3 h-3 rounded-full bg-green-400 animate-pulse" />
-                  <span className="text-sm font-medium text-muted-foreground tracking-wide uppercase">Live Results</span>
-                </div>
-
-                <div className="space-y-6">
-                  <div className="group cursor-default">
-                    <div className="text-4xl sm:text-5xl font-bold text-gradient font-poppins">
-                      <AnimatedCounter end={50} suffix="+" />
+                {/* Header with 3D Logo & Live Status */}
+                <div className="flex items-center justify-between pb-3 border-b border-white/10">
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 rounded-2xl bg-white/[0.06] border border-white/15 p-1 flex items-center justify-center shadow-inner">
+                      <img 
+                        src={logo} 
+                        alt="Brandयात्रा Logo" 
+                        className="w-full h-full object-contain" 
+                      />
                     </div>
-                    <div className="text-sm text-muted-foreground mt-1 group-hover:text-foreground/70 transition-colors">Campaigns launched & counting</div>
-                  </div>
-
-                  <div className="w-full h-px bg-gradient-to-r from-transparent via-border to-transparent" />
-
-                  <div className="grid grid-cols-2 gap-6">
-                    <div className="group cursor-default">
-                      <div className="text-2xl sm:text-3xl font-bold text-gradient font-poppins">
-                        <AnimatedCounter end={2} suffix="M+" />
-                      </div>
-                      <div className="text-xs text-muted-foreground mt-1 group-hover:text-foreground/70 transition-colors">Audience reached</div>
-                    </div>
-                    <div className="group cursor-default">
-                      <div className="text-2xl sm:text-3xl font-bold text-gradient font-poppins">
-                        <AnimatedCounter end={98} suffix="%" />
-                      </div>
-                      <div className="text-xs text-muted-foreground mt-1 group-hover:text-foreground/70 transition-colors">Client satisfaction</div>
+                    <div>
+                      <h4 className="font-bold text-sm text-foreground font-poppins">Brandयात्रा Operations</h4>
+                      <p className="text-[11px] text-muted-foreground">Live Performance Dashboard</p>
                     </div>
                   </div>
+
+                  <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold">
+                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                    <span>Active</span>
+                  </div>
                 </div>
+
+                {/* Primary Growth Metric */}
+                <div className="space-y-2 p-5 rounded-2xl bg-white/[0.03] border border-white/10">
+                  <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                    Total Audience Reached
+                  </span>
+                  <div className="text-4xl sm:text-5xl font-black font-poppins text-gradient">
+                    <AnimatedCounter end={50} suffix="M+" />
+                  </div>
+                  <p className="text-xs text-muted-foreground">
+                    Targeted impressions across Meta, Google Search, YouTube & Reels
+                  </p>
+                </div>
+
+                {/* Secondary Metrics 2x2 Grid */}
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="p-4 rounded-xl bg-white/[0.03] border border-white/10">
+                    <span className="text-xs text-muted-foreground font-medium">Growth Campaigns</span>
+                    <div className="text-2xl sm:text-3xl font-extrabold text-foreground mt-1">
+                      <AnimatedCounter end={120} suffix="+" />
+                    </div>
+                    <span className="text-[11px] text-emerald-400 mt-0.5 block">↑ Scaling actively</span>
+                  </div>
+
+                  <div className="p-4 rounded-xl bg-white/[0.03] border border-white/10">
+                    <span className="text-xs text-muted-foreground font-medium">Client Rating</span>
+                    <div className="text-2xl sm:text-3xl font-extrabold text-foreground mt-1">
+                      <AnimatedCounter end={4} suffix=".9/5" />
+                    </div>
+                    <span className="text-[11px] text-amber-400 mt-0.5 block">★ Verified reviews</span>
+                  </div>
+                </div>
+
+                {/* Bottom CTA trigger */}
+                <button
+                  onClick={handleContactClick}
+                  className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-primary/20 via-pink-500/20 to-orange-500/20 hover:from-primary/30 hover:to-orange-500/30 border border-white/15 text-xs font-bold text-foreground flex items-center justify-center gap-2 transition-all"
+                >
+                  <span>Request Full Case Studies & Deck</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </button>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce pointer-events-none z-10">
-        <div className="w-6 h-10 rounded-full border-2 border-foreground/20 flex items-start justify-center p-2">
-          <div className="w-1 h-3 bg-foreground/30 rounded-full animate-pulse" />
+      {/* Floating Scroll Indicator */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 animate-bounce pointer-events-none z-10">
+        <div className="w-5 h-9 rounded-full border border-white/20 flex items-start justify-center p-1.5 backdrop-blur-md bg-white/5">
+          <div className="w-1 h-2.5 bg-gradient-to-b from-primary to-orange-500 rounded-full animate-pulse" />
         </div>
       </div>
     </section>

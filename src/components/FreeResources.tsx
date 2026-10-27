@@ -86,8 +86,8 @@ const FreeResources = () => {
       toast.success(`Access granted to "${resource.title}"`, {
         description: 'Resource link opened. Save a copy to your workspace.',
       });
-      // Trigger a clean sample text download or open
-      const sampleContent = `# ${resource.title}\nBrandYatra Growth Framework\n\nCategory: ${resource.category}\nFormat: ${resource.format}\n\nSummary:\n${resource.description}\n\nKey Takeaways:\n${resource.highlights.map(h => `- ${h}`).join('\n')}\n\n---\nCreated with care by BrandYatra Digital (https://brandyatra.com)\nNeed personalized growth advisory? Contact us at info@brandyatra.com`;
+      // Trigger a clean sample text download
+      const sampleContent = `# ${resource.title}\nBrandYatra Growth Framework\n\nCategory: ${resource.category}\nFormat: ${resource.format}\n\nSummary:\n${resource.description}\n\nKey Takeaways:\n${resource.highlights.map(h => `- ${h}`).join('\n')}\n\n---\nCreated with care by BrandYatra Digital (https://brandyatra.com)\nNeed personalized growth advisory? Contact us at hello.brandyatra@gmail.com`;
       const blob = new Blob([sampleContent], { type: 'text/markdown;charset=utf-8;' });
       const url = URL.createObjectURL(blob);
       const link = document.createElement('a');
@@ -100,52 +100,56 @@ const FreeResources = () => {
   };
 
   return (
-    <section id="resources" className="py-24 sm:py-32 relative bg-muted/20 border-t border-border/50">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="resources" className="py-24 sm:py-36 relative overflow-hidden">
+      {/* 3D Atmospheric Background Glows */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/3 left-[-5%] w-[500px] h-[500px] bg-gradient-to-tr from-indigo-600/15 via-purple-600/10 to-transparent rounded-full blur-[130px]" />
+        <div className="absolute bottom-10 right-[-5%] w-[450px] h-[450px] bg-gradient-to-br from-pink-600/15 via-orange-600/10 to-transparent rounded-full blur-[130px]" />
+      </div>
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6">
           <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/20 bg-primary/5 text-xs font-semibold text-primary mb-4 tracking-wide uppercase">
-              <Sparkles className="w-3.5 h-3.5" />
-              Open Source Frameworks
+            <div className="glass-pill-3d inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold tracking-widest uppercase mb-4">
+              <Sparkles className="w-3.5 h-3.5 text-primary" />
+              <span className="text-foreground/90">Agency Blueprints</span>
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold font-poppins tracking-tight text-foreground">
-              Battle-tested playbooks, freely shared.
+              Battle-tested playbooks, <span className="text-gradient">freely shared</span>.
             </h2>
-            <p className="mt-4 text-base sm:text-lg text-muted-foreground leading-relaxed">
-              We publish our internal agency SOPs, spreadsheets, and audit checklists. No gatekeeping, no fake paywalls.
+            <p className="mt-4 text-base sm:text-lg text-muted-foreground leading-relaxed font-light">
+              We publish our internal agency SOPs, spreadsheets, and audit checklists. 100% open-source growth architectures.
             </p>
           </div>
 
-          <Button
-            variant="outline"
-            onClick={() => {
-              const newsletter = document.getElementById('newsletter');
-              newsletter?.scrollIntoView({ behavior: 'smooth' });
-            }}
-            className="self-start md:self-auto text-xs font-semibold"
+          <a
+            href="#newsletter"
+            className="self-start md:self-auto"
           >
-            Get Weekly Playbooks in Inbox
-            <ArrowRight className="w-3.5 h-3.5 ml-2" />
-          </Button>
+            <button className="btn-3d-gradient inline-flex items-center gap-2 px-6 py-3 rounded-xl text-xs font-semibold text-white group">
+              <span>Get Weekly Playbooks in Inbox</span>
+              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+            </button>
+          </a>
         </div>
 
         {/* Resources Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-7">
           {resourcesList.map((resource) => (
             <div
               key={resource.id}
-              className="rounded-2xl border border-border bg-card p-6 sm:p-7 flex flex-col justify-between hover:border-primary/40 transition-all shadow-xs group"
+              className="glass-card-3d rounded-2xl p-7 sm:p-8 flex flex-col justify-between hover:border-primary/50 transition-all duration-500 group border border-white/10"
             >
               <div className="space-y-4">
                 <div className="flex items-center justify-between text-xs font-medium text-muted-foreground">
-                  <span className="px-2.5 py-1 rounded-md bg-muted text-foreground font-semibold">
+                  <span className="px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary font-semibold">
                     {resource.category}
                   </span>
-                  <span>{resource.format}</span>
+                  <span className="text-muted-foreground/80">{resource.format}</span>
                 </div>
 
-                <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors">
+                <h3 className="text-xl sm:text-2xl font-bold text-foreground group-hover:text-primary transition-colors font-poppins">
                   {resource.title}
                 </h3>
 
@@ -153,31 +157,31 @@ const FreeResources = () => {
                   {resource.description}
                 </p>
 
-                <div className="pt-2 space-y-2 border-t border-border/60">
-                  <p className="text-xs font-semibold text-foreground/80">Includes:</p>
+                <div className="pt-3 space-y-2.5 border-t border-white/[0.08]">
+                  <p className="text-xs font-semibold uppercase tracking-wider text-foreground/80">Includes In Blueprint:</p>
                   {resource.highlights.map((highlight, idx) => (
-                    <div key={idx} className="flex items-start gap-2 text-xs text-muted-foreground">
-                      <CheckCircle className="w-3.5 h-3.5 text-emerald-500 flex-shrink-0 mt-0.5" />
-                      <span>{highlight}</span>
+                    <div key={idx} className="flex items-start gap-2.5 text-xs text-muted-foreground">
+                      <CheckCircle className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
+                      <span className="leading-relaxed">{highlight}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div className="pt-6 mt-6 border-t border-border/60 flex items-center gap-3">
+              <div className="pt-6 mt-6 border-t border-white/[0.08] flex items-center gap-3">
                 <Button
                   onClick={() => handleDownload(resource)}
                   disabled={downloadingId === resource.id}
-                  className="flex-1 text-xs font-semibold h-10"
+                  className="btn-3d-gradient flex-1 text-xs font-semibold h-11 text-white"
                 >
                   <Download className="w-3.5 h-3.5 mr-2" />
-                  {downloadingId === resource.id ? 'Preparing Download...' : 'Download Free Copy'}
+                  {downloadingId === resource.id ? 'Packaging Download...' : 'Download Free Copy'}
                 </Button>
                 <Button
                   variant="outline"
                   size="sm"
                   onClick={() => setSelectedResource(resource)}
-                  className="h-10 px-3 text-xs"
+                  className="h-11 px-4 text-xs font-semibold border-white/20 hover:bg-white/[0.06] hover:border-primary/40 rounded-xl"
                 >
                   Preview
                 </Button>
@@ -190,9 +194,9 @@ const FreeResources = () => {
       {/* Preview Dialog */}
       <Dialog open={!!selectedResource} onOpenChange={() => setSelectedResource(null)}>
         {selectedResource && (
-          <DialogContent className="max-w-lg">
+          <DialogContent className="max-w-lg glass-card-3d border border-white/20 bg-slate-950/90 backdrop-blur-2xl">
             <DialogHeader>
-              <div className="text-xs font-semibold text-primary mb-1 uppercase tracking-wider">
+              <div className="text-xs font-bold text-primary mb-1 uppercase tracking-wider">
                 {selectedResource.category}
               </div>
               <DialogTitle className="text-xl font-bold font-poppins text-foreground">
@@ -204,14 +208,14 @@ const FreeResources = () => {
             </DialogHeader>
 
             <div className="space-y-4 py-3">
-              <div className="p-4 rounded-xl bg-muted/50 border border-border space-y-2">
-                <h4 className="text-xs font-semibold uppercase tracking-wider text-foreground">
+              <div className="p-4 rounded-xl bg-white/[0.03] border border-white/10 space-y-2">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-foreground">
                   Key Framework Elements:
                 </h4>
-                <ul className="space-y-2">
+                <ul className="space-y-2.5">
                   {selectedResource.highlights.map((h, i) => (
-                    <li key={i} className="text-xs text-muted-foreground flex items-start gap-2">
-                      <span className="w-4 h-4 rounded-full bg-primary/10 text-primary text-[10px] font-bold flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <li key={i} className="text-xs text-muted-foreground flex items-start gap-2.5">
+                      <span className="w-5 h-5 rounded-full bg-primary/20 text-primary text-[10px] font-bold flex items-center justify-center flex-shrink-0 mt-0.5 border border-primary/30">
                         {i + 1}
                       </span>
                       <span>{h}</span>
@@ -227,7 +231,7 @@ const FreeResources = () => {
                   handleDownload(selectedResource);
                   setSelectedResource(null);
                 }}
-                className="flex-1 text-xs font-semibold"
+                className="btn-3d-gradient flex-1 text-xs font-semibold text-white h-11"
               >
                 <Download className="w-3.5 h-3.5 mr-2" />
                 Download Complete Guide
@@ -241,3 +245,4 @@ const FreeResources = () => {
 };
 
 export default FreeResources;
+

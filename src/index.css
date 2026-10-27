@@ -17,105 +17,85 @@ html {
   scrollbar-width: none;
 }
 
-/* Custom scrollbar styling — subtle, refined */
+/* Custom scrollbar styling — luminous cyan/violet accent */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 7px;
 }
 
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: hsl(var(--background));
 }
 
 ::-webkit-scrollbar-thumb {
-  background: hsl(var(--muted-foreground) / 0.2);
+  background: linear-gradient(180deg, hsl(262 90% 66% / 0.5), hsl(28 100% 55% / 0.5));
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--muted-foreground) / 0.35);
+  background: linear-gradient(180deg, hsl(262 90% 66% / 0.8), hsl(28 100% 55% / 0.8));
 }
 
 /* Firefox custom scrollbar */
 * {
   scrollbar-width: thin;
-  scrollbar-color: hsl(var(--muted-foreground) / 0.2) transparent;
+  scrollbar-color: hsl(262 90% 66% / 0.4) transparent;
 }
 
 /* Custom text selection color */
 ::selection {
-  background: hsl(258 90% 66% / 0.2);
-  color: inherit;
+  background: hsl(262 90% 66% / 0.35);
+  color: #ffffff;
 }
 ::-moz-selection {
-  background: hsl(258 90% 66% / 0.2);
-  color: inherit;
+  background: hsl(262 90% 66% / 0.35);
+  color: #ffffff;
 }
 
-/* Page load animation */
-@keyframes pageLoad {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-body {
-  animation: pageLoad 0.4s ease-out;
-}
-
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
-
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. */
 @layer base {
   :root {
     /* Light mode variables */
-    --background: 0 0% 99%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 230 30% 98%;
+    --foreground: 230 40% 10%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 230 40% 10%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 230 40% 10%;
 
-    --primary: 258 90% 66%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 262 90% 60%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 230 25% 94%;
+    --secondary-foreground: 230 40% 15%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215 16% 47%;
+    --muted: 230 20% 93%;
+    --muted-foreground: 230 15% 45%;
 
-    --accent: 187 100% 40%;
-    /* Darker cyan for light mode visibility */
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 26 100% 52%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 258 90% 66%;
+    --border: 230 20% 88%;
+    --input: 230 20% 88%;
+    --ring: 262 90% 60%;
 
-    --radius: 0.75rem;
+    --radius: 1rem;
 
-    /* Custom brand gradients - Light mode */
-    --gradient-primary: linear-gradient(135deg, hsl(258 90% 66%), hsl(330 85% 65%), hsl(25 95% 62%));
-    --gradient-accent: linear-gradient(135deg, hsl(258 90% 66%), hsl(187 100% 40%));
-    --gradient-glow: linear-gradient(135deg, hsl(258 90% 66% / 0.1), hsl(330 85% 65% / 0.1), hsl(25 95% 62% / 0.1));
+    --gradient-primary: linear-gradient(135deg, #6366f1 0%, #a855f7 35%, #ec4899 65%, #ff781f 100%);
+    --gradient-accent: linear-gradient(135deg, #ff781f 0%, #ec4899 100%);
+    --gradient-fire: linear-gradient(135deg, #ff781f 0%, #ff3d71 50%, #7928ca 100%);
+    --gradient-cyber: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
 
-    /* Glass effect - Light mode */
-    --glass-bg: rgba(255, 255, 255, 0.6);
-    --glass-border: rgba(0, 0, 0, 0.06);
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.4);
+    --shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.08);
 
-    /* Glows and shadows - Light mode */
-    --glow-primary: 0 0 40px hsl(258 90% 66% / 0.15);
-    --glow-accent: 0 0 40px hsl(187 100% 40% / 0.15);
-    --shadow-glass: 0 4px 24px 0 rgba(0, 0, 0, 0.06);
+    --glow-primary: 0 0 35px hsl(262 90% 60% / 0.25);
+    --glow-accent: 0 0 35px hsl(26 100% 52% / 0.25);
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -128,61 +108,57 @@ All colors MUST be HSL.
   }
 
   .dark {
-    /* Deep navy/charcoal base — slightly warmer */
-    --background: 224 71% 4%;
-    --foreground: 213 31% 91%;
+    /* Cosmic Obsidian Base with deep indigo/violet undertones */
+    --background: 240 38% 5%;
+    --foreground: 220 25% 95%;
 
-    /* Card backgrounds */
-    --card: 224 60% 7%;
-    --card-foreground: 213 31% 91%;
+    /* Glass card translucent fill */
+    --card: 240 30% 8%;
+    --card-foreground: 220 25% 95%;
 
-    --popover: 224 60% 7%;
-    --popover-foreground: 213 31% 91%;
+    --popover: 240 32% 8%;
+    --popover-foreground: 220 25% 95%;
 
-    /* Primary gradient purple */
-    --primary: 258 90% 66%;
+    /* Electric Violet & Sunset Orange matching the 3D logo */
+    --primary: 262 92% 67%;
     --primary-foreground: 0 0% 100%;
 
-    /* Secondary muted dark */
-    --secondary: 221 50% 12%;
-    --secondary-foreground: 213 31% 91%;
+    --secondary: 240 25% 12%;
+    --secondary-foreground: 220 25% 95%;
 
-    /* Muted surfaces */
-    --muted: 221 45% 10%;
-    --muted-foreground: 218 11% 55%;
+    --muted: 240 25% 10%;
+    --muted-foreground: 225 15% 65%;
 
-    /* Accent cyan */
-    --accent: 187 100% 50%;
-    --accent-foreground: 224 71% 4%;
+    --accent: 28 100% 56%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 222 28% 14%;
-    --input: 222 28% 14%;
-    --ring: 258 90% 66%;
+    --border: 240 24% 16%;
+    --input: 240 24% 16%;
+    --ring: 262 92% 67%;
 
-    /* Custom brand gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(258 90% 66%), hsl(330 85% 65%), hsl(25 95% 62%));
-    --gradient-accent: linear-gradient(135deg, hsl(258 90% 66%), hsl(187 100% 50%));
-    --gradient-glow: linear-gradient(135deg, hsl(258 90% 66% / 0.2), hsl(330 85% 65% / 0.2), hsl(25 95% 62% / 0.2));
+    --gradient-primary: linear-gradient(135deg, #6366f1 0%, #a855f7 35%, #ec4899 70%, #ff781f 100%);
+    --gradient-accent: linear-gradient(135deg, #ff781f 0%, #ec4899 50%, #8b5cf6 100%);
+    --gradient-fire: linear-gradient(135deg, #ff781f 0%, #ff3d71 50%, #7928ca 100%);
+    --gradient-cyber: linear-gradient(135deg, #00f2fe 0%, #3b82f6 50%, #8b5cf6 100%);
 
-    /* Glass effect */
-    --glass-bg: rgba(255, 255, 255, 0.03);
-    --glass-border: rgba(255, 255, 255, 0.06);
+    /* 3D Glassmorphism tokens */
+    --glass-bg: rgba(18, 20, 39, 0.55);
+    --glass-border: rgba(255, 255, 255, 0.12);
+    --shadow-glass: 0 20px 50px -10px rgba(0, 0, 0, 0.65), 0 0 30px rgba(139, 92, 246, 0.1);
 
-    /* Glows and shadows */
-    --glow-primary: 0 0 40px hsl(258 90% 66% / 0.3);
-    --glow-accent: 0 0 40px hsl(187 100% 50% / 0.3);
-    --shadow-glass: 0 4px 24px 0 rgba(0, 0, 0, 0.4);
+    --glow-primary: 0 0 50px rgba(139, 92, 246, 0.35);
+    --glow-accent: 0 0 50px rgba(255, 120, 31, 0.35);
 
-    --sidebar-background: 240 5.9% 10%;
+    --sidebar-background: 240 35% 8%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 240 3.7% 15.9%;
     --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-border: 240 25% 15%;
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 }
@@ -196,27 +172,105 @@ All colors MUST be HSL.
     @apply bg-background text-foreground antialiased;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     letter-spacing: -0.011em;
+    background-color: hsl(var(--background));
+    background-image: 
+      radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, rgba(255, 120, 31, 0.12) 0px, transparent 50%),
+      radial-gradient(at 50% 50%, rgba(168, 85, 247, 0.08) 0px, transparent 60%),
+      radial-gradient(at 100% 100%, rgba(6, 182, 212, 0.1) 0px, transparent 50%),
+      radial-gradient(at 0% 100%, rgba(236, 72, 153, 0.12) 0px, transparent 50%);
+    background-attachment: fixed;
   }
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
+  h1, h2, h3, h4, h5, h6 {
     font-family: 'Poppins', 'Inter', sans-serif;
   }
 }
 
 @layer utilities {
-  .glass-effect {
-    background: var(--glass-bg);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid var(--glass-border);
-    box-shadow: var(--shadow-glass);
+  /* 3D Glassmorphism Cards */
+  .glass-card-3d {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.015) 100%);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow: 
+      inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.25),
+      0 20px 40px -15px rgba(0, 0, 0, 0.65),
+      0 0 25px rgba(139, 92, 246, 0.08);
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
+  .glass-card-3d:hover {
+    transform: translateY(-6px) scale(1.01);
+    border-color: rgba(168, 85, 247, 0.45);
+    box-shadow: 
+      inset 0 1px 2px 0 rgba(255, 255, 255, 0.4),
+      0 30px 60px -15px rgba(0, 0, 0, 0.8),
+      0 0 40px rgba(139, 92, 246, 0.25),
+      0 0 60px rgba(255, 120, 31, 0.15);
+  }
+
+  /* Universal glass effect */
+  .glass-effect {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid var(--glass-border);
+    box-shadow: 
+      inset 0 1px 1px 0 rgba(255, 255, 255, 0.15),
+      var(--shadow-glass);
+  }
+
+  /* 3D Specular reflection */
+  .specular-border {
+    position: relative;
+  }
+  .specular-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.03) 40%, rgba(139, 92, 246, 0.4) 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  /* High impact 3D gradient button */
+  .btn-3d-gradient {
+    background: linear-gradient(135deg, #6366f1 0%, #a855f7 35%, #ec4899 70%, #ff781f 100%);
+    position: relative;
+    box-shadow: 
+      inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.45),
+      0 12px 28px -6px rgba(168, 85, 247, 0.5),
+      0 4px 12px rgba(255, 120, 31, 0.3);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .btn-3d-gradient:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 
+      inset 0 1px 2px 0 rgba(255, 255, 255, 0.6),
+      0 18px 36px -6px rgba(168, 85, 247, 0.7),
+      0 8px 20px rgba(255, 120, 31, 0.45);
+  }
+
+  /* 3D Glass Pill Badge */
+  .glass-pill-3d {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.02) 100%);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 
+      inset 0 1px 1px 0 rgba(255, 255, 255, 0.3),
+      0 8px 20px -5px rgba(0, 0, 0, 0.4),
+      0 0 15px rgba(139, 92, 246, 0.15);
+  }
+
+  /* Text Gradients */
   .text-gradient {
     background: var(--gradient-primary);
     -webkit-background-clip: text;
@@ -224,6 +278,21 @@ All colors MUST be HSL.
     background-clip: text;
   }
 
+  .text-gradient-fire {
+    background: var(--gradient-fire);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-cyber {
+    background: var(--gradient-cyber);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Glowing utility effects */
   .glow-primary {
     box-shadow: var(--glow-primary);
   }
@@ -232,53 +301,14 @@ All colors MUST be HSL.
     box-shadow: var(--glow-accent);
   }
 
-  .animate-glow {
-    animation: glow 3s ease-in-out infinite alternate;
+  .glow-box-3d {
+    box-shadow: 
+      0 0 0 1px rgba(255, 255, 255, 0.12),
+      0 15px 35px -5px rgba(0, 0, 0, 0.7),
+      0 0 35px rgba(139, 92, 246, 0.25);
   }
 
-  @keyframes glow {
-    from {
-      box-shadow: 0 0 20px hsl(258 90% 66% / 0.2);
-    }
-
-    to {
-      box-shadow: 0 0 40px hsl(258 90% 66% / 0.4), 0 0 60px hsl(330 85% 65% / 0.2);
-    }
-  }
-
-  .animate-float {
-    animation: float 6s ease-in-out infinite;
-  }
-
-  @keyframes float {
-
-    0%,
-    100% {
-      transform: translateY(0px);
-    }
-
-    50% {
-      transform: translateY(-15px);
-    }
-  }
-
-  .animate-slide-in {
-    animation: slideIn 0.6s ease-out;
-  }
-
-  @keyframes slideIn {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  /* 3D perspective effects */
+  /* 3D perspective transforms */
   .perspective-1000 {
     perspective: 1000px;
   }
@@ -292,23 +322,31 @@ All colors MUST be HSL.
     will-change: transform;
   }
 
-  /* Parallax scroll effect */
-  .parallax {
-    transform: translateZ(-1px) scale(2);
+  /* Shimmer animation */
+  @keyframes shimmer {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
   }
 
-  /* Enhanced hover effects with 3D transforms */
-  .hover-3d {
-    transition: transform 0.3s ease-out;
+  .animate-shimmer {
+    animation: shimmer 2.5s infinite;
   }
 
-  .hover-3d:hover {
-    transform: translateY(-8px) rotateX(3deg);
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
   }
 
-  /* Radial gradient utility */
-  .bg-gradient-radial {
-    background: radial-gradient(circle, var(--tw-gradient-stops));
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-12px) rotate(0.5deg);
+    }
   }
 
   .animate-marquee {
