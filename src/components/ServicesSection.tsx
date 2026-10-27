@@ -22,7 +22,7 @@ import {
 } from "lucide-react";
 import ServiceDetailsDialog from "./ServiceDetailsDialog";
 import { serviceDetails } from "@/data/serviceDetails";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 type CategoryFilter = "all" | "web" | "branding" | "marketing" | "ai";
@@ -248,10 +248,73 @@ const servicesList = [
   }
 ];
 
+const valuePillars = [
+  {
+    title: "100% In-House",
+    tagline: "Zero Outsourcing",
+    detail: "Dedicated Squad • Direct Comms",
+    icon: ShieldCheck,
+    accent: "from-emerald-400 via-teal-500 to-cyan-500",
+    glow: "rgba(16, 185, 129, 0.4)",
+    border: "hover:border-emerald-500/50",
+    beacon: "bg-emerald-400",
+    badge: "Verified Squad"
+  },
+  {
+    title: "AI Native Systems",
+    tagline: "LLM Workflows",
+    detail: "Automated Ops • 24/7 Precision",
+    icon: Cpu,
+    accent: "from-cyan-400 via-blue-500 to-indigo-500",
+    glow: "rgba(6, 182, 212, 0.4)",
+    border: "hover:border-cyan-500/50",
+    beacon: "bg-cyan-400",
+    badge: "Autonomous Ops"
+  },
+  {
+    title: "ROAS Driven",
+    tagline: "3.8x+ Avg Return",
+    detail: "Profit First Scaling • Zero Fluff",
+    icon: Flame,
+    accent: "from-orange-400 via-amber-500 to-red-500",
+    glow: "rgba(249, 115, 22, 0.4)",
+    border: "hover:border-orange-500/50",
+    beacon: "bg-orange-400",
+    badge: "High-Yield"
+  },
+  {
+    title: "Full IP Ownership",
+    tagline: "100% Assets Yours",
+    detail: "Complete Code, Vectors & Data",
+    icon: Award,
+    accent: "from-purple-400 via-pink-500 to-indigo-500",
+    glow: "rgba(168, 85, 247, 0.4)",
+    border: "hover:border-purple-500/50",
+    beacon: "bg-purple-400",
+    badge: "Zero Lock-In"
+  }
+];
+
+const rotatingHighlights = [
+  "High-Converting Websites & Web Apps",
+  "Data-Backed Meta & Google Ad Campaigns",
+  "Intelligent AI Business Automation",
+  "Distinctive 3D Brand & Visual Identities",
+  "High-Yield Lead Generation Funnels"
+];
+
 const ServicesSection = () => {
   const [selectedCategory, setSelectedCategory] = useState<CategoryFilter>("all");
   const [selectedService, setSelectedService] = useState<string | null>(null);
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [focusIndex, setFocusIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setFocusIndex((prev) => (prev + 1) % rotatingHighlights.length);
+    }, 3000);
+    return () => clearInterval(timer);
+  }, []);
 
   const handleLearnMore = (title: string) => {
     setSelectedService(title);
@@ -278,44 +341,129 @@ const ServicesSection = () => {
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Section Header */}
-        <div className="max-w-4xl mx-auto text-center space-y-5 mb-14 sm:mb-20">
-          <div className="glass-pill-3d inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest text-primary shadow-lg">
+        {/* Section Header with Fade In / Fade Out Viewport Animation */}
+        <motion.div 
+          initial={{ opacity: 0, y: 32 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.2 }}
+          transition={{ duration: 0.65, ease: "easeOut" }}
+          className="max-w-4xl mx-auto text-center space-y-5 mb-14 sm:mb-20"
+        >
+          {/* Top Category Badge */}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: false, amount: 0.2 }}
+            transition={{ duration: 0.45 }}
+            className="glass-pill-3d inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest text-primary shadow-lg"
+          >
             <Sparkles className="w-4 h-4 text-orange-400 animate-pulse" />
             <span>BRANDYATRA — Our Services</span>
-          </div>
+          </motion.div>
 
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-black font-poppins tracking-tight leading-[1.08] text-foreground">
+          {/* Main Headline */}
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.08 }}
+            className="text-4xl sm:text-5xl md:text-6xl font-black font-poppins tracking-tight leading-[1.08] text-foreground"
+          >
             We Build Brands. <span className="text-gradient">We Grow Businesses.</span>
-          </h2>
+          </motion.h2>
 
-          <p className="text-base sm:text-lg text-muted-foreground font-light leading-relaxed max-w-2xl mx-auto pt-1">
-            From building high-quality websites to scaling your brand through marketing, creative design and AI-powered automation, we provide everything your business needs to grow in the digital world.
-          </p>
-
-          {/* 4 Feature Value Pillars Strip */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-3xl mx-auto pt-4">
-            <div className="glass-card-3d p-3 rounded-xl border border-white/10 flex items-center gap-2.5 justify-center">
-              <ShieldCheck className="w-4 h-4 text-emerald-400 flex-shrink-0" />
-              <span className="text-xs font-semibold text-foreground/90">100% In-House</span>
-            </div>
-            <div className="glass-card-3d p-3 rounded-xl border border-white/10 flex items-center gap-2.5 justify-center">
-              <Cpu className="w-4 h-4 text-cyan-400 flex-shrink-0" />
-              <span className="text-xs font-semibold text-foreground/90">AI Native Systems</span>
-            </div>
-            <div className="glass-card-3d p-3 rounded-xl border border-white/10 flex items-center gap-2.5 justify-center">
-              <Flame className="w-4 h-4 text-orange-400 flex-shrink-0" />
-              <span className="text-xs font-semibold text-foreground/90">ROAS Driven</span>
-            </div>
-            <div className="glass-card-3d p-3 rounded-xl border border-white/10 flex items-center gap-2.5 justify-center">
-              <Award className="w-4 h-4 text-purple-400 flex-shrink-0" />
-              <span className="text-xs font-semibold text-foreground/90">Full IP Ownership</span>
-            </div>
+          {/* Dynamic Rotating Capability Focus Ticker with Fade In / Fade Out */}
+          <div className="h-10 sm:h-11 flex items-center justify-center overflow-hidden">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={focusIndex}
+                initial={{ opacity: 0, y: 14, filter: "blur(6px)" }}
+                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                exit={{ opacity: 0, y: -14, filter: "blur(6px)" }}
+                transition={{ duration: 0.4, ease: "easeInOut" }}
+                className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-pill-3d text-xs sm:text-sm font-semibold border border-primary/30 text-foreground/90 shadow-md backdrop-blur-md"
+              >
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+                <span className="text-muted-foreground text-xs uppercase tracking-wider font-mono">Engineered for:</span>
+                <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-pink-400 to-indigo-400">
+                  {rotatingHighlights[focusIndex]}
+                </span>
+              </motion.div>
+            </AnimatePresence>
           </div>
-        </div>
 
-        {/* 3D Interactive Category Filter Navigation */}
-        <div className="flex items-center justify-center mb-12 sm:mb-16">
+          {/* Core Descriptive Subtext */}
+          <motion.p 
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.12 }}
+            className="text-base sm:text-lg text-muted-foreground font-light leading-relaxed max-w-2xl mx-auto pt-1"
+          >
+            From building high-quality websites to scaling your brand through marketing, creative design and AI-powered automation, we provide everything your business needs to grow in the digital world.
+          </motion.p>
+
+          {/* 4 Feature Value Pillars Strip with 3D Glassmorphism & Staggered Viewport Fade In / Fade Out */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 max-w-4xl mx-auto pt-5">
+            {valuePillars.map((pillar, idx) => {
+              const PillarIcon = pillar.icon;
+              return (
+                <motion.div
+                  key={pillar.title}
+                  initial={{ opacity: 0, y: 26, scale: 0.94 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  viewport={{ once: false, amount: 0.2 }}
+                  transition={{ duration: 0.5, delay: idx * 0.08, ease: "easeOut" }}
+                  whileHover={{ y: -5, scale: 1.02 }}
+                  className={`glass-card-3d group relative p-4 rounded-2xl border border-white/10 ${pillar.border} transition-all duration-300 overflow-hidden text-left shadow-lg backdrop-blur-xl`}
+                >
+                  {/* Top specular glow beam */}
+                  <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${pillar.accent} opacity-75 group-hover:opacity-100 transition-opacity`} />
+                  
+                  {/* Radial ambient glow on hover */}
+                  <div 
+                    className="absolute -top-10 -right-10 w-24 h-24 rounded-full blur-2xl opacity-0 group-hover:opacity-40 transition-opacity pointer-events-none"
+                    style={{ background: pillar.glow }}
+                  />
+
+                  <div className="relative z-10 flex items-center justify-between mb-3">
+                    <div className={`w-9 h-9 rounded-xl bg-gradient-to-br ${pillar.accent} p-[1px] shadow-md group-hover:scale-110 transition-transform`}>
+                      <div className="w-full h-full rounded-[10px] bg-slate-950/75 backdrop-blur-sm flex items-center justify-center">
+                        <PillarIcon className="w-4 h-4 text-white" />
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-white/[0.06] border border-white/10 text-[10px] font-semibold text-muted-foreground">
+                      <span className={`w-1.5 h-1.5 rounded-full ${pillar.beacon} animate-pulse`} />
+                      <span>{pillar.badge}</span>
+                    </div>
+                  </div>
+
+                  <div className="relative z-10 space-y-0.5">
+                    <h4 className="text-sm font-extrabold font-poppins text-foreground group-hover:text-primary transition-colors tracking-tight">
+                      {pillar.title}
+                    </h4>
+                    <p className="text-xs font-semibold text-gradient">
+                      {pillar.tagline}
+                    </p>
+                    <p className="text-[11px] text-muted-foreground font-light leading-snug">
+                      {pillar.detail}
+                    </p>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+        </motion.div>
+
+        {/* 3D Interactive Category Filter Navigation with Fade In / Fade Out */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.2 }}
+          transition={{ duration: 0.5 }}
+          className="flex items-center justify-center mb-12 sm:mb-16"
+        >
           <div className="glass-card-3d p-1.5 sm:p-2 rounded-2xl border border-white/15 flex flex-wrap gap-1.5 sm:gap-2 justify-center shadow-2xl backdrop-blur-2xl">
             {categories.map((cat) => {
               const Icon = cat.icon;
@@ -341,7 +489,7 @@ const ServicesSection = () => {
               );
             })}
           </div>
-        </div>
+        </motion.div>
 
         {/* 10 Services 3D Frosted Glass Grid with Smooth Animation */}
         <motion.div 
@@ -446,8 +594,14 @@ const ServicesSection = () => {
           </AnimatePresence>
         </motion.div>
 
-        {/* Closing Callout: Let's Grow Your Brand Together */}
-        <div className="mt-20 sm:mt-28 max-w-4xl mx-auto">
+        {/* Closing Callout: Let's Grow Your Brand Together with Fade In / Fade Out */}
+        <motion.div 
+          initial={{ opacity: 0, y: 32, scale: 0.96 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          viewport={{ once: false, amount: 0.2 }}
+          transition={{ duration: 0.6 }}
+          className="mt-20 sm:mt-28 max-w-4xl mx-auto"
+        >
           <div className="glass-card-3d rounded-3xl p-8 sm:p-12 md:p-14 text-center border border-white/20 relative overflow-hidden shadow-2xl">
             {/* Ambient Background Aura */}
             <div className="absolute top-0 right-0 w-72 h-72 bg-gradient-to-br from-primary/30 to-orange-500/20 rounded-full blur-[100px] pointer-events-none" />
@@ -499,7 +653,7 @@ const ServicesSection = () => {
               </p>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
 
       {/* Deep-dive dialog for service */}
