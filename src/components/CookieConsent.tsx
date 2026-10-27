@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Cookie } from 'lucide-react';
 import { Button } from './ui/button';
+import { Link } from 'react-router-dom';
 
 const CookieConsent = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -52,9 +53,11 @@ const CookieConsent = () => {
                 </h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">
                   We use cookies to enhance your browsing experience, analyze site traffic, and personalize content. 
-                  By clicking "Accept All", you consent to our use of cookies. You can manage your preferences at any time.
+                  Read our <Link to="/privacy-policy" className="text-primary underline hover:text-primary/80">Privacy Policy</Link> for details. 
+                  By clicking "Accept All", you consent to our use of cookies.
                 </p>
               </div>
+
 
               <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
                 <Button

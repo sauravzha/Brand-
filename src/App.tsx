@@ -16,6 +16,8 @@ import CookieConsent from "@/components/CookieConsent";
 
 import Careers from "./pages/Careers";
 import Resources from "./pages/Resources";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsConditions from "./pages/TermsConditions";
 
 const queryClient = new QueryClient();
 
@@ -30,12 +32,16 @@ const AnimatedRoutes = () => {
         <Route path="/blog/:slug" element={<BlogPost />} />
         <Route path="/careers" element={<Careers />} />
         <Route path="/resources" element={<Resources />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/terms" element={<TermsConditions />} />
+        <Route path="/terms-and-conditions" element={<TermsConditions />} />
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
         <Route path="*" element={<NotFound />} />
       </Routes>
     </PageTransition>
   );
 };
+
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(() => {

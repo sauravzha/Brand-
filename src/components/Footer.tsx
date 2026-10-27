@@ -20,10 +20,11 @@ const footerLinks = {
   resources: [
     { label: "Free SOPs & Playbooks", href: "#resources" },
     { label: "FAQ", href: "#faq" },
-    { label: "Privacy Policy", href: "#" },
-    { label: "Terms of Service", href: "#" },
+    { label: "Privacy Policy", to: "/privacy-policy" },
+    { label: "Terms of Service", to: "/terms-and-conditions" },
   ],
 };
+
 
 const socialLinks = [
   {
