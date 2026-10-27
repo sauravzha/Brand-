@@ -6,13 +6,18 @@ interface StructuredDataProps {
 
 const StructuredData = ({ type = 'Organization' }: StructuredDataProps) => {
   useEffect(() => {
+    const siteUrl = typeof window !== 'undefined' && window.location.origin.includes('http')
+      ? window.location.origin
+      : 'https://www.brandyatra.online';
+
     const organizationSchema = {
       '@context': 'https://schema.org',
       '@type': type,
       name: 'Brandयात्रा',
       alternateName: 'Brand Yatra',
-      url: typeof window !== 'undefined' ? window.location.origin : 'https://brandyatra.com',
-      logo: typeof window !== 'undefined' ? `${window.location.origin}/src/assets/brandyatra-logo.png` : 'https://brandyatra.com/src/assets/brandyatra-logo.png',
+      url: siteUrl,
+      logo: `${siteUrl}/brandyatra-logo.png`,
+      image: `${siteUrl}/brandyatra-logo.png`,
       description: 'Transforming brands into digital journeys through creative marketing, automation, and strategic storytelling.',
       foundingDate: '2024',
       founders: [
@@ -34,7 +39,7 @@ const StructuredData = ({ type = 'Organization' }: StructuredDataProps) => {
         availableLanguage: ['English', 'Hindi']
       },
       sameAs: [
-        'https://www.instagram.com/brand_yatraa?igsh=dmprcm1yM2JkODlx'
+        'https://www.instagram.com/brandyatraa?cplk=anFkdWRodnE3ZG95'
       ],
       areaServed: {
         '@type': 'Country',
@@ -45,6 +50,14 @@ const StructuredData = ({ type = 'Organization' }: StructuredDataProps) => {
         ratingValue: '4.9',
         reviewCount: '150'
       }
+    };
+
+    const websiteSchema = {
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: 'Brandयात्रा',
+      alternateName: ['Brand Yatra', 'brandyatra.online'],
+      url: siteUrl
     };
 
     const faqSchema = {
@@ -116,7 +129,7 @@ const StructuredData = ({ type = 'Organization' }: StructuredDataProps) => {
       }
     };
 
-    const structuredData = [organizationSchema, faqSchema, serviceSchema];
+    const structuredData = [organizationSchema, websiteSchema, faqSchema, serviceSchema];
 
     // Remove existing structured data script if any
     const existingScript = document.getElementById('structured-data');
@@ -143,4 +156,3 @@ const StructuredData = ({ type = 'Organization' }: StructuredDataProps) => {
 };
 
 export default StructuredData;
-

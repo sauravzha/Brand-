@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 
 # Sitemaps
-Sitemap: https://brandyatra.com/sitemap.xml
+Sitemap: https://www.brandyatra.online/sitemap.xml

@@ -1,13 +1,10 @@
 import { Star, Quote, ChevronLeft, ChevronRight } from "lucide-react";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import testimonialMan1 from "@/assets/testimonial-man-1.jpg";
 import testimonialWoman1 from "@/assets/testimonial-woman-1.jpg";
 import testimonialMan2 from "@/assets/testimonial-man-2.jpg";
 import testimonialWoman2 from "@/assets/testimonial-woman-2.jpg";
 import testimonialMan3 from "@/assets/testimonial-man-3.jpg";
-import FloatingIcons3D from "./3d/FloatingIcons3D";
-import { Button } from "./ui/button";
-import RotatingRings3D from "./3d/RotatingRings3D";
 
 const testimonials = [
   {
@@ -63,10 +60,29 @@ const testimonials = [
 
 const TestimonialsSection = () => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+
+  const checkScroll = () => {
+    if (scrollContainerRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
+      setCanScrollLeft(scrollLeft > 10);
+      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10);
+    }
+  };
+
+  useEffect(() => {
+    const container = scrollContainerRef.current;
+    if (container) {
+      container.addEventListener('scroll', checkScroll, { passive: true });
+      checkScroll();
+    }
+    return () => container?.removeEventListener('scroll', checkScroll);
+  }, []);
 
   const scroll = (direction: 'left' | 'right') => {
     if (scrollContainerRef.current) {
-      const scrollAmount = 400;
+      const scrollAmount = 420;
       const newScrollLeft = scrollContainerRef.current.scrollLeft + 
         (direction === 'left' ? -scrollAmount : scrollAmount);
       
@@ -78,94 +94,105 @@ const TestimonialsSection = () => {
   };
 
   return (
-    <section id="testimonials" className="py-20 sm:py-32 relative overflow-hidden">
-      {/* Background Elements */}
+    <section id="testimonials" className="py-24 sm:py-36 relative overflow-hidden">
+      {/* Background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent/5 rounded-full blur-3xl" />
-      </div>
-
-      {/* 3D Floating Icons */}
-      <div className="absolute right-0 top-10 w-full md:w-1/2 h-[450px] pointer-events-none opacity-35">
-        <FloatingIcons3D />
-      </div>
-      
-      {/* Additional 3D Rings */}
-      <div className="absolute left-0 bottom-0 w-full md:w-1/3 h-[350px] pointer-events-none opacity-20">
-        <RotatingRings3D />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-accent/[0.04] rounded-full blur-[100px]" />
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Section Header */}
-        <div className="text-center space-y-4 mb-12 sm:mb-16">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold font-poppins">
-            Client <span className="text-gradient">Stories</span>
-          </h2>
-          <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">
-            Hear what our partners have to say about their growth journey
-          </p>
+        {/* Section Header with navigation */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 sm:mb-16">
+          <div className="space-y-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-border bg-muted/50 text-xs font-medium text-muted-foreground uppercase tracking-widest">
+              Testimonials
+            </div>
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold font-poppins tracking-tight leading-[1.1]">
+              What our clients<br />
+              <span className="text-gradient">say about us</span>
+            </h2>
+          </div>
+          
+          {/* Navigation arrows */}
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => scroll('left')}
+              disabled={!canScrollLeft}
+              className={`w-12 h-12 rounded-full border flex items-center justify-center transition-all duration-300 ${
+                canScrollLeft 
+                  ? 'border-border hover:border-primary/30 hover:bg-primary/5 text-foreground/60 hover:text-primary cursor-pointer'
+                  : 'border-border/30 text-foreground/20 cursor-not-allowed'
+              }`}
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+            <button
+              onClick={() => scroll('right')}
+              disabled={!canScrollRight}
+              className={`w-12 h-12 rounded-full border flex items-center justify-center transition-all duration-300 ${
+                canScrollRight 
+                  ? 'border-border hover:border-primary/30 hover:bg-primary/5 text-foreground/60 hover:text-primary cursor-pointer'
+                  : 'border-border/30 text-foreground/20 cursor-not-allowed'
+              }`}
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+          </div>
         </div>
 
         {/* Testimonials Scrollable Container */}
         <div className="relative">
-          <div className="overflow-x-auto pb-8 scrollbar-hide">
-            <div className="flex gap-6 sm:gap-8 px-4" style={{ width: 'max-content' }}>
+          {/* Fade edges */}
+          <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
+
+          <div 
+            ref={scrollContainerRef}
+            className="overflow-x-auto pb-4 scrollbar-hide -mx-4 px-4"
+          >
+            <div className="flex gap-5 sm:gap-6" style={{ width: 'max-content' }}>
               {testimonials.map((testimonial, index) => (
                 <div
                   key={index}
-                  className="glass-effect p-6 sm:p-8 rounded-2xl hover:scale-105 transition-all duration-300 hover:shadow-xl hover:shadow-primary/20 animate-slide-in flex-shrink-0 w-[350px] sm:w-[400px]"
-                  style={{ animationDelay: `${index * 0.1}s` }}
+                  className="border border-border/60 bg-card/30 backdrop-blur-sm p-7 sm:p-8 rounded-2xl hover:border-primary/20 hover:shadow-lg hover:shadow-primary/5 transition-all duration-500 flex-shrink-0 w-[340px] sm:w-[400px] flex flex-col"
                 >
-              {/* Quote Icon */}
-              <div className="mb-4 sm:mb-6">
-                <Quote className="w-8 h-8 sm:w-10 sm:h-10 text-primary/50" />
-              </div>
-
-              {/* Rating */}
-              <div className="flex gap-1 mb-4 sm:mb-6">
-                {[...Array(testimonial.rating)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 sm:w-5 sm:h-5 fill-primary text-primary" />
-                ))}
-              </div>
-
-              {/* Testimonial Text */}
-              <p className="text-sm sm:text-base text-foreground/90 mb-6 sm:mb-8 leading-relaxed">
-                "{testimonial.text}"
-              </p>
-
-              {/* Author */}
-              <div className="flex items-center gap-4 pt-6 border-t border-border/50">
-                <div className="relative">
-                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full overflow-hidden ring-2 ring-primary/50">
-                    <img
-                      src={testimonial.image}
-                      alt={testimonial.name}
-                      className="w-full h-full object-cover"
-                    />
+                  {/* Quote + Rating row */}
+                  <div className="flex items-center justify-between mb-5">
+                    <Quote className="w-8 h-8 text-primary/30" />
+                    <div className="flex gap-0.5">
+                      {[...Array(testimonial.rating)].map((_, i) => (
+                        <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
+                      ))}
+                    </div>
                   </div>
-                  <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-primary rounded-full border-2 border-background flex items-center justify-center">
-                    <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                    </svg>
+
+                  {/* Testimonial Text */}
+                  <p className="text-sm sm:text-base text-foreground/80 mb-8 leading-relaxed flex-1">
+                    "{testimonial.text}"
+                  </p>
+
+                  {/* Author */}
+                  <div className="flex items-center gap-4 pt-5 border-t border-border/40">
+                    <div className="relative">
+                      <div className="w-11 h-11 rounded-full overflow-hidden ring-2 ring-border">
+                        <img
+                          src={testimonial.image}
+                          alt={testimonial.name}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <div className="font-semibold text-foreground text-sm">{testimonial.name}</div>
+                      <div className="text-xs text-muted-foreground">{testimonial.role}</div>
+                    </div>
                   </div>
                 </div>
-                <div>
-                  <div className="font-semibold text-foreground text-sm sm:text-base">{testimonial.name}</div>
-                  <div className="text-xs sm:text-sm text-muted-foreground">{testimonial.role}</div>
-                </div>
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
-        
-        {/* Scroll Indicator */}
-        <div className="text-center mt-6">
-          <p className="text-sm text-muted-foreground">
-            ← Scroll horizontally to see more stories →
-          </p>
-        </div>
       </div>
-    </div>
     </section>
   );
 };

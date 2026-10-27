@@ -15,6 +15,7 @@ import ErrorBoundary from "@/components/ErrorBoundary";
 import CookieConsent from "@/components/CookieConsent";
 
 import Careers from "./pages/Careers";
+import Resources from "./pages/Resources";
 
 const queryClient = new QueryClient();
 
@@ -28,6 +29,7 @@ const AnimatedRoutes = () => {
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:slug" element={<BlogPost />} />
         <Route path="/careers" element={<Careers />} />
+        <Route path="/resources" element={<Resources />} />
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
         <Route path="*" element={<NotFound />} />
       </Routes>
@@ -36,16 +38,18 @@ const AnimatedRoutes = () => {
 };
 
 const App = () => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(() => {
+    // Check if user already saw the intro in this session
+    if (typeof window !== "undefined") {
+      return !sessionStorage.getItem("brandyatra_visited");
+    }
+    return false;
+  });
 
-  useEffect(() => {
-    // Ensure minimum loading time for smooth animation
-    const minLoadTime = setTimeout(() => {
-      setIsLoading(false);
-    }, 4500);
-
-    return () => clearTimeout(minLoadTime);
-  }, []);
+  const handleLoadingComplete = () => {
+    sessionStorage.setItem("brandyatra_visited", "true");
+    setIsLoading(false);
+  };
 
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
@@ -53,7 +57,7 @@ const App = () => {
         <TooltipProvider>
           <Toaster />
           <Sonner />
-          {isLoading && <LoadingScreen onLoadingComplete={() => setIsLoading(false)} />}
+          {isLoading && <LoadingScreen onLoadingComplete={handleLoadingComplete} />}
           <ErrorBoundary>
             <BrowserRouter>
               <AnimatedRoutes />

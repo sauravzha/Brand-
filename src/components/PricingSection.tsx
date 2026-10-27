@@ -1,10 +1,9 @@
 import { Button } from "./ui/button";
-import { Check, Sparkles, TrendingUp, Zap } from "lucide-react";
-import RotatingRings3D from "./3d/RotatingRings3D";
+import { Check, Sparkles, TrendingUp, Zap, ArrowRight } from "lucide-react";
 
 const pricingPlans = [
   {
-    name: "Essential Growth",
+    name: "Essential",
     price: "₹20,000",
     period: "/month",
     description: "Perfect for small businesses starting their digital journey",
@@ -18,11 +17,11 @@ const pricingPlans = [
       "Monthly Performance Report",
       "Email Support",
     ],
-    cta: "Start Growing",
+    cta: "Start growing",
     popular: false
   },
   {
-    name: "Accelerated Scale",
+    name: "Growth",
     price: "₹50,000",
     period: "/month",
     description: "Ideal for growing brands ready to aggressively scale",
@@ -38,7 +37,7 @@ const pricingPlans = [
       "Bi-weekly Strategy Calls",
       "Priority Support"
     ],
-    cta: "Scale Your Brand",
+    cta: "Scale your brand",
     popular: true
   },
   {
@@ -58,132 +57,132 @@ const pricingPlans = [
       "Brand Strategy Consulting",
       "Custom Integrations"
     ],
-    cta: "Contact Sales",
+    cta: "Contact us",
     popular: false
   }
 ];
 
 const PricingSection = () => {
   const handleContactClick = () => {
-    window.location.href = "mailto:jhasaurav562@gmail.com";
+    const el = document.getElementById("contact");
+    if (el) el.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
-    <section id="pricing" className="py-20 sm:py-32 relative overflow-hidden">
-      {/* Background Elements */}
+    <section id="pricing" className="py-24 sm:py-36 relative overflow-hidden">
+      {/* Background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-gradient-to-b from-primary/5 via-transparent to-transparent" />
-        <div className="absolute top-1/4 left-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl" />
-      </div>
-
-      {/* 3D Rotating Rings */}
-      <div className="absolute left-1/2 -translate-x-1/2 top-20 w-full max-w-[500px] h-[400px] pointer-events-none opacity-30">
-        <RotatingRings3D />
+        <div className="absolute top-1/4 left-0 w-80 h-80 bg-accent/[0.04] rounded-full blur-[100px]" />
+        <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-primary/[0.04] rounded-full blur-[100px]" />
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
-        <div className="text-center space-y-4 mb-12 sm:mb-16">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold font-poppins">
-            Simple, <span className="text-gradient">Transparent Pricing</span>
+        <div className="text-center space-y-4 mb-16 sm:mb-20">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-border bg-muted/50 text-xs font-medium text-muted-foreground uppercase tracking-widest">
+            Pricing
+          </div>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold font-poppins tracking-tight">
+            Transparent pricing,<br />
+            <span className="text-gradient">real results</span>
           </h2>
-          <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">
-            Choose the perfect plan for your business growth. No hidden fees, cancel anytime.
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto font-light">
+            Choose the plan that fits your stage. No hidden fees, cancel anytime.
           </p>
         </div>
 
         {/* Pricing Cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 sm:gap-6 max-w-6xl mx-auto items-start">
           {pricingPlans.map((plan, index) => {
             const Icon = plan.icon;
             return (
               <div
                 key={index}
-                className={`relative group glass-effect rounded-3xl p-6 sm:p-8 transition-all duration-300 ${
+                className={`relative group rounded-2xl transition-all duration-500 ${
                   plan.popular
-                    ? 'ring-2 ring-primary shadow-2xl shadow-primary/20 scale-105 lg:scale-110'
-                    : 'hover:scale-105 hover:shadow-xl hover:shadow-primary/10'
+                    ? 'border-2 border-primary shadow-xl shadow-primary/10 bg-card scale-[1.02] lg:scale-105'
+                    : 'border border-border/60 bg-card/50 backdrop-blur-sm hover:border-primary/20 hover:shadow-lg hover:shadow-primary/5'
                 }`}
               >
                 {/* Popular Badge */}
                 {plan.popular && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-6 py-2 bg-gradient-to-r from-primary to-accent rounded-full text-white text-sm font-semibold shadow-lg">
+                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1.5 bg-gradient-to-r from-primary to-accent rounded-full text-white text-xs font-semibold shadow-lg tracking-wide">
                     Most Popular
                   </div>
                 )}
 
-                {/* Icon */}
-                <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${plan.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
-                  <Icon className="w-7 h-7 text-white" />
-                </div>
-
-                {/* Plan Name */}
-                <h3 className="text-2xl sm:text-3xl font-bold font-poppins mb-2">
-                  {plan.name}
-                </h3>
-
-                {/* Description */}
-                <p className="text-sm text-muted-foreground mb-6">
-                  {plan.description}
-                </p>
-
-                {/* Price */}
-                <div className="mb-6">
-                  <div className="flex items-baseline gap-1">
-                    <span className="text-4xl sm:text-5xl font-bold text-gradient font-poppins">
-                      {plan.price}
-                    </span>
-                    <span className="text-muted-foreground text-lg">
-                      {plan.period}
-                    </span>
+                <div className="p-7 sm:p-8">
+                  {/* Icon + Plan Name */}
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${plan.color} flex items-center justify-center shadow-md group-hover:scale-105 transition-transform duration-300`}>
+                      <Icon className="w-5 h-5 text-white" />
+                    </div>
+                    <h3 className="text-xl font-bold font-poppins">
+                      {plan.name}
+                    </h3>
                   </div>
-                </div>
 
-                {/* CTA Button */}
-                <Button
-                  onClick={handleContactClick}
-                  className={`w-full mb-8 text-base py-6 rounded-xl transition-all duration-300 ${
-                    plan.popular
-                      ? 'bg-gradient-to-r from-primary to-accent hover:shadow-xl hover:shadow-primary/50'
-                      : 'bg-gradient-to-r from-primary/80 to-accent/80 hover:from-primary hover:to-accent'
-                  }`}
-                >
-                  {plan.cta}
-                </Button>
-
-                {/* Features List */}
-                <div className="space-y-4">
-                  <p className="text-sm font-semibold text-foreground">
-                    What's included:
+                  {/* Description */}
+                  <p className="text-sm text-muted-foreground mb-6 leading-relaxed">
+                    {plan.description}
                   </p>
-                  <ul className="space-y-3">
+
+                  {/* Price */}
+                  <div className="mb-6 pb-6 border-b border-border/40">
+                    <div className="flex items-baseline gap-1">
+                      <span className="text-4xl sm:text-5xl font-bold font-poppins text-foreground">
+                        {plan.price}
+                      </span>
+                      <span className="text-muted-foreground text-base">
+                        {plan.period}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Features List */}
+                  <ul className="space-y-3 mb-8">
                     {plan.features.map((feature, featureIndex) => (
                       <li key={featureIndex} className="flex items-start gap-3">
-                        <Check className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                        <span className="text-sm text-muted-foreground leading-relaxed">
+                        <Check className={`w-4 h-4 flex-shrink-0 mt-0.5 ${plan.popular ? 'text-primary' : 'text-muted-foreground'}`} />
+                        <span className="text-sm text-foreground/70 leading-relaxed">
                           {feature}
                         </span>
                       </li>
                     ))}
                   </ul>
+
+                  {/* CTA Button */}
+                  <Button
+                    onClick={handleContactClick}
+                    className={`w-full py-5 rounded-xl transition-all duration-300 group/btn ${
+                      plan.popular
+                        ? 'bg-gradient-to-r from-primary to-accent hover:shadow-xl hover:shadow-primary/30 text-white'
+                        : 'bg-foreground/5 hover:bg-foreground/10 text-foreground border border-border/50'
+                    }`}
+                    variant={plan.popular ? "default" : "ghost"}
+                  >
+                    <span className="flex items-center gap-2">
+                      {plan.cta}
+                      <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-0.5 transition-transform" />
+                    </span>
+                  </Button>
                 </div>
               </div>
             );
           })}
         </div>
 
-        {/* Additional Info */}
-        <div className="text-center mt-12 sm:mt-16 glass-effect p-6 sm:p-8 rounded-2xl max-w-3xl mx-auto">
-          <p className="text-muted-foreground mb-4">
-            Need a custom solution? We can tailor a package specifically for your business needs.
+        {/* Custom CTA */}
+        <div className="text-center mt-12 sm:mt-16">
+          <p className="text-muted-foreground text-sm mb-4">
+            Need something custom? Let's talk about what would work for your business.
           </p>
-          <Button
-            variant="outline"
+          <button
             onClick={handleContactClick}
-            className="border-2 border-primary/50 hover:border-primary hover:bg-primary/10"
+            className="text-primary hover:text-primary/80 transition-colors font-medium text-sm underline underline-offset-4"
           >
-            Contact Us for Custom Plans
-          </Button>
+            Get a custom quote →
+          </button>
         </div>
       </div>
     </section>

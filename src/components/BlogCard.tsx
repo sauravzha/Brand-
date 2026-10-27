@@ -1,6 +1,5 @@
 import { Calendar, Clock, ArrowRight, User } from "lucide-react";
 import { Link } from "react-router-dom";
-import { Button } from "./ui/button";
 
 interface BlogCardProps {
   title: string;
@@ -15,60 +14,57 @@ interface BlogCardProps {
 
 const BlogCard = ({ title, excerpt, author, date, readTime, image, category, slug }: BlogCardProps) => {
   return (
-    <article className="group glass-effect rounded-2xl overflow-hidden hover:scale-[1.02] transition-all duration-300 hover:shadow-xl hover:shadow-primary/20 animate-slide-in">
-      {/* Image */}
-      <div className="relative h-48 sm:h-56 overflow-hidden">
+    <article className="group rounded-2xl border border-border bg-card overflow-hidden hover:border-primary/40 transition-all flex flex-col shadow-xs">
+      {/* Image with subtle zoom on hover */}
+      <Link to={`/blog/${slug}`} className="relative h-48 sm:h-52 overflow-hidden bg-muted block">
         <img
           src={image}
           alt={title}
-          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          loading="lazy"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
-        <div className="absolute top-4 left-4">
-          <span className="px-3 py-1 bg-primary/90 backdrop-blur-sm text-white text-xs font-semibold rounded-full">
+        <div className="absolute top-3 left-3">
+          <span className="px-2.5 py-1 bg-background/80 backdrop-blur-md text-foreground text-xs font-semibold rounded-md border border-border/60">
             {category}
           </span>
         </div>
-      </div>
+      </Link>
 
       {/* Content */}
-      <div className="p-6 sm:p-8 space-y-4">
-        {/* Meta Info */}
-        <div className="flex items-center gap-4 text-xs sm:text-sm text-muted-foreground">
-          <div className="flex items-center gap-1">
-            <User className="w-4 h-4" />
-            <span>{author}</span>
-          </div>
-          <div className="flex items-center gap-1">
-            <Calendar className="w-4 h-4" />
+      <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
+        <div className="space-y-2.5">
+          {/* Meta Info */}
+          <div className="flex items-center gap-3 text-xs text-muted-foreground">
+            <span className="font-medium text-foreground/80">{author}</span>
+            <span>•</span>
             <span>{date}</span>
-          </div>
-          <div className="flex items-center gap-1">
-            <Clock className="w-4 h-4" />
+            <span>•</span>
             <span>{readTime}</span>
           </div>
+
+          {/* Title */}
+          <Link to={`/blog/${slug}`}>
+            <h3 className="text-lg sm:text-xl font-bold font-poppins text-foreground group-hover:text-primary transition-colors line-clamp-2">
+              {title}
+            </h3>
+          </Link>
+
+          {/* Excerpt */}
+          <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed line-clamp-3">
+            {excerpt}
+          </p>
         </div>
 
-        {/* Title */}
-        <h3 className="text-xl sm:text-2xl font-bold font-poppins group-hover:text-gradient transition-colors">
-          {title}
-        </h3>
-
-        {/* Excerpt */}
-        <p className="text-sm sm:text-base text-muted-foreground leading-relaxed line-clamp-3">
-          {excerpt}
-        </p>
-
-        {/* Read More Button */}
-        <Link to={`/blog/${slug}`}>
-          <Button
-            variant="ghost"
-            className="group/btn p-0 h-auto font-semibold text-primary hover:text-primary hover:bg-transparent"
+        {/* Read More Link */}
+        <div className="pt-2 border-t border-border/60">
+          <Link
+            to={`/blog/${slug}`}
+            className="inline-flex items-center text-xs font-semibold text-primary group-hover:translate-x-1 transition-transform"
           >
             Read Full Article
-            <ArrowRight className="ml-2 w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-          </Button>
-        </Link>
+            <ArrowRight className="ml-1.5 w-3.5 h-3.5" />
+          </Link>
+        </div>
       </div>
     </article>
   );

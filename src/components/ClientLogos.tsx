@@ -34,38 +34,27 @@ const clientLogos = [
 ];
 
 const ClientLogos = () => {
-  // We duplicate the logos array so that the marquee scrolls seamlessly
   const duplicatedLogos = [...clientLogos, ...clientLogos, ...clientLogos];
 
   return (
-    <section id="client-logos" className="py-16 sm:py-24 relative overflow-hidden bg-background">
-      
-      {/* Premium Glow effect behind the logos */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[150px] bg-primary/10 blur-[80px] pointer-events-none" />
-
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 mb-12 sm:mb-16 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+    <section id="client-logos" className="py-16 sm:py-20 relative overflow-hidden border-y border-border/30">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 mb-10 sm:mb-12 relative z-10">
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center"
+          className="text-center text-sm font-medium text-muted-foreground uppercase tracking-[0.2em]"
         >
-          <h2 className="text-2xl sm:text-3xl font-bold font-poppins mb-2">
-            Trusted by <span className="text-gradient">Growing Brands</span>
-          </h2>
-          <p className="text-sm sm:text-base text-muted-foreground">
-            We're proud to partner with innovative startups and businesses
-          </p>
-        </motion.div>
+          Trusted by growing brands across India
+        </motion.p>
       </div>
 
       {/* Infinite Scrolling Marquee */}
-      <div className="relative w-full overflow-hidden flex flex-col items-center justify-center">
-        
-        {/* Gradient fades on the left and right edges for a premium "disappearing" effect */}
-        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-background to-transparent z-20" />
-        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-background to-transparent z-20" />
+      <div className="relative w-full overflow-hidden">
+        {/* Gradient fades */}
+        <div className="absolute left-0 top-0 bottom-0 w-24 sm:w-40 bg-gradient-to-r from-background to-transparent z-20" />
+        <div className="absolute right-0 top-0 bottom-0 w-24 sm:w-40 bg-gradient-to-l from-background to-transparent z-20" />
 
         <div className="flex w-[300%] sm:w-[200%] md:w-[150%] animate-marquee hover:[animation-play-state:paused]">
           {duplicatedLogos.map((client, index) => (
@@ -76,11 +65,11 @@ const ClientLogos = () => {
               rel="noopener noreferrer"
               className="flex-1 flex items-center justify-center px-8 sm:px-12 group transition-all duration-300"
             >
-              <div className="glass-effect p-6 rounded-2xl border border-white/5 bg-white/5 flex items-center justify-center w-40 h-24 hover:border-primary/30 transition-all duration-500 hover:scale-110 hover:shadow-lg hover:shadow-primary/20">
+              <div className="flex items-center justify-center w-32 h-16 sm:w-40 sm:h-20 rounded-xl border border-transparent hover:border-border/30 transition-all duration-300">
                 <img
                   src={client.logo}
                   alt={`${client.name} logo`}
-                  className="max-w-full h-10 w-auto object-contain opacity-50 group-hover:opacity-100 transition-opacity duration-300 filter grayscale group-hover:grayscale-0"
+                  className="max-w-full h-8 sm:h-10 w-auto object-contain opacity-30 group-hover:opacity-70 transition-opacity duration-500 filter grayscale group-hover:grayscale-0"
                   loading="lazy"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;

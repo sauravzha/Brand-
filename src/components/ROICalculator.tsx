@@ -1,163 +1,295 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
-import { Calculator, TrendingUp, Users, Heart } from 'lucide-react';
+import { Calculator, ArrowRight, DollarSign, TrendingUp, Users, Target, ShieldCheck, Sparkles, PieChart } from 'lucide-react';
 import { Button } from './ui/button';
-import { Input } from './ui/input';
-import { Label } from './ui/label';
-import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
+
+interface IndustryProfile {
+  id: string;
+  label: string;
+  cpc: number; // Cost per click in INR
+  ctr: number; // Click through rate %
+  cvr: number; // Conversion rate %
+  aov: number; // Average order or deal value in INR
+  roasRange: string;
+  primaryChannels: string;
+}
+
+const industries: Record<string, IndustryProfile> = {
+  dtc: {
+    id: 'dtc',
+    label: 'D2C & E-Commerce',
+    cpc: 8,
+    ctr: 2.2,
+    cvr: 3.2,
+    aov: 1400,
+    roasRange: '3.2x - 4.5x',
+    primaryChannels: 'Meta Ads (60%), Google Shopping (25%), Creator UGC (15%)',
+  },
+  b2b: {
+    id: 'b2b',
+    label: 'B2B & SaaS',
+    cpc: 35,
+    ctr: 3.5,
+    cvr: 4.8,
+    aov: 25000,
+    roasRange: '4.0x - 6.5x',
+    primaryChannels: 'Google Search (50%), LinkedIn Ads (35%), Retargeting (15%)',
+  },
+  services: {
+    id: 'services',
+    label: 'Consulting & Agencies',
+    cpc: 22,
+    ctr: 2.8,
+    cvr: 5.5,
+    aov: 35000,
+    roasRange: '3.5x - 5.0x',
+    primaryChannels: 'Google Search (45%), Meta Lead Ads (35%), Cold Email/Outreach (20%)',
+  },
+  local: {
+    id: 'local',
+    label: 'Healthcare & Local',
+    cpc: 14,
+    ctr: 3.8,
+    cvr: 6.2,
+    aov: 4500,
+    roasRange: '3.0x - 4.2x',
+    primaryChannels: 'Google Maps / Local Search (50%), Meta Geotargeting (50%)',
+  },
+};
+
+const budgetPresets = [30000, 75000, 150000, 300000, 500000];
+
+const formatINR = (val: number): string => {
+  return new Intl.NumberFormat('en-IN', {
+    style: 'currency',
+    currency: 'INR',
+    maximumFractionDigits: 0,
+  }).format(val);
+};
 
 const ROICalculator = () => {
-  const [monthlyBudget, setMonthlyBudget] = useState('');
-  const [results, setResults] = useState<{
-    reachRange: string;
-    leadsRange: string;
-    roi: string;
-  } | null>(null);
+  const [budget, setBudget] = useState<number>(75000);
+  const [selectedIndustry, setSelectedIndustry] = useState<string>('dtc');
 
-  const calculateROI = () => {
-    const budget = parseFloat(monthlyBudget);
-    if (!budget) return;
+  const industry = industries[selectedIndustry] || industries.dtc;
 
-    // Based on user request: 50k gives 1 Lakh to 2 Lakh engagement
-    // So multiplier is 2x to 4x for engagement (reach)
-    const reachMin = budget * 2;
-    const reachMax = budget * 4;
+  const calculations = useMemo(() => {
+    // Estimated clicks based on industry CPC
+    const estimatedClicks = Math.round(budget / industry.cpc);
+    // Estimated impressions based on CTR
+    const estimatedImpressions = Math.round((estimatedClicks / (industry.ctr / 100)));
+    // Conversions (leads or transactions) based on CVR
+    const conversions = Math.round(estimatedClicks * (industry.cvr / 100));
+    // Estimated Pipeline or Gross Revenue
+    const estimatedRevenue = conversions * industry.aov;
+    // Estimated ROAS
+    const calculatedRoas = (estimatedRevenue / budget).toFixed(1);
 
-    // Let's assume 1-2% of engagement converts to leads
-    const leadsMin = Math.round(reachMin * 0.01);
-    const leadsMax = Math.round(reachMax * 0.02);
-
-    setResults({
-      reachRange: `${reachMin.toLocaleString('en-IN')} - ${reachMax.toLocaleString('en-IN')}`,
-      leadsRange: `${leadsMin.toLocaleString('en-IN')} - ${leadsMax.toLocaleString('en-IN')}`,
-      roi: '250% - 400%' // typical healthy agency ROI metric
-    });
-  };
+    return {
+      impressions: estimatedImpressions.toLocaleString('en-IN'),
+      clicks: estimatedClicks.toLocaleString('en-IN'),
+      conversions: conversions.toLocaleString('en-IN'),
+      revenue: formatINR(estimatedRevenue),
+      roas: `${calculatedRoas}x`,
+    };
+  }, [budget, industry]);
 
   return (
-    <section id="roi-calculator" className="py-20 sm:py-32 relative overflow-hidden">
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl" />
-      </div>
-
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center space-y-4 mb-12 sm:mb-16"
-        >
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-primary to-accent mb-4">
-            <Calculator className="w-8 h-8 text-white" />
+    <section id="roi-calculator" className="py-24 sm:py-32 relative overflow-hidden bg-background">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <div className="max-w-3xl mx-auto text-center mb-14">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/20 bg-primary/5 text-xs font-semibold text-primary mb-4 tracking-wide uppercase">
+            <Calculator className="w-3.5 h-3.5" />
+            Interactive Projection Engine
           </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold font-poppins">
-            Calculate Your <span className="text-gradient">Growth</span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold font-poppins tracking-tight text-foreground">
+            Forecast your return before spending a single Rupee.
           </h2>
-          <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">
-            See the exact engagement and leads you can expect from your digital marketing budget.
+          <p className="mt-4 text-base sm:text-lg text-muted-foreground leading-relaxed">
+            Calibrated with real campaign benchmarks across 120+ client accounts. Select your vertical and adjust your planned monthly spend.
           </p>
-        </motion.div>
+        </div>
 
-        <div className="max-w-4xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* Input Form */}
-            <Card className="glass-effect border-white/10">
-              <CardHeader>
-                <CardTitle>Enter Your Budget</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                <div className="space-y-2">
-                  <Label htmlFor="budget" className="text-base">Monthly Ad Budget (₹)</Label>
-                  <Input
-                    id="budget"
-                    type="number"
-                    placeholder="e.g., 50000"
-                    value={monthlyBudget}
-                    onChange={(e) => setMonthlyBudget(e.target.value)}
-                    className="h-14 text-lg bg-background/50"
-                  />
-                  <p className="text-sm text-muted-foreground pt-2">
-                    Enter amount in INR (₹)
-                  </p>
+        {/* Calculator Grid */}
+        <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          {/* Controls Column */}
+          <div className="lg:col-span-6 rounded-2xl border border-border bg-card p-6 sm:p-8 space-y-7 shadow-xs">
+            {/* Step 1: Industry */}
+            <div className="space-y-3">
+              <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground flex items-center justify-between">
+                <span>1. Select Industry Model</span>
+                <span className="text-primary font-medium normal-case">Benchmark active</span>
+              </label>
+              <div className="grid grid-cols-2 gap-2.5">
+                {Object.values(industries).map((item) => {
+                  const isSelected = item.id === selectedIndustry;
+                  return (
+                    <button
+                      key={item.id}
+                      type="button"
+                      onClick={() => setSelectedIndustry(item.id)}
+                      className={`p-3 rounded-xl text-left border text-xs sm:text-sm font-medium transition-all ${
+                        isSelected
+                          ? 'border-primary bg-primary/10 text-primary font-semibold shadow-xs'
+                          : 'border-border/80 bg-muted/40 text-muted-foreground hover:text-foreground hover:bg-muted/70'
+                      }`}
+                    >
+                      <div className="truncate">{item.label}</div>
+                      <div className="text-[11px] opacity-70 mt-0.5">ROAS ~ {item.roasRange}</div>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Step 2: Budget Slider */}
+            <div className="space-y-4 pt-4 border-t border-border">
+              <div className="flex items-center justify-between">
+                <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                  2. Planned Monthly Ad Spend
+                </label>
+                <span className="text-xl sm:text-2xl font-bold font-poppins text-foreground">
+                  {formatINR(budget)}
+                </span>
+              </div>
+
+              <input
+                type="range"
+                min={20000}
+                max={1000000}
+                step={5000}
+                value={budget}
+                onChange={(e) => setBudget(Number(e.target.value))}
+                className="w-full h-2.5 bg-muted rounded-lg appearance-none cursor-pointer accent-primary"
+              />
+
+              {/* Preset Buttons */}
+              <div className="flex flex-wrap gap-2 pt-1">
+                {budgetPresets.map((preset) => (
+                  <button
+                    key={preset}
+                    type="button"
+                    onClick={() => setBudget(preset)}
+                    className={`px-3 py-1 rounded-md text-xs font-medium transition-colors ${
+                      budget === preset
+                        ? 'bg-foreground text-background font-semibold'
+                        : 'bg-muted/60 text-muted-foreground hover:text-foreground hover:bg-muted'
+                    }`}
+                  >
+                    {preset >= 100000 ? `₹${preset / 100000} Lakh` : `₹${preset / 1000}k`}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Channel Mix Insight */}
+            <div className="p-4 rounded-xl bg-muted/30 border border-border/70 space-y-1.5 text-xs">
+              <div className="flex items-center gap-1.5 font-semibold text-foreground">
+                <PieChart className="w-3.5 h-3.5 text-primary" />
+                Recommended Channel Split:
+              </div>
+              <p className="text-muted-foreground leading-relaxed">
+                {industry.primaryChannels}
+              </p>
+            </div>
+          </div>
+
+          {/* Results Column */}
+          <div className="lg:col-span-6 rounded-2xl border border-primary/30 bg-card p-6 sm:p-8 space-y-6 shadow-sm relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-48 h-48 bg-primary/5 rounded-full blur-2xl pointer-events-none" />
+
+            <div className="flex items-center justify-between pb-4 border-b border-border">
+              <div>
+                <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                  Projected 30-Day Outcomes
+                </span>
+                <h3 className="text-lg font-bold text-foreground mt-0.5">
+                  Expected Growth Metrics
+                </h3>
+              </div>
+              <span className="text-xs px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-semibold flex items-center gap-1">
+                <TrendingUp className="w-3 h-3" /> Live Model
+              </span>
+            </div>
+
+            {/* Big Headline Metric: Estimated Revenue / Pipeline */}
+            <div className="p-5 rounded-xl bg-primary/[0.04] dark:bg-primary/[0.08] border border-primary/20 space-y-1">
+              <span className="text-xs font-medium text-muted-foreground">
+                Estimated Gross Value / Pipeline Generated
+              </span>
+              <div className="text-3xl sm:text-4xl font-extrabold font-poppins text-primary">
+                {calculations.revenue}
+              </div>
+              <p className="text-xs text-muted-foreground pt-1">
+                Based on benchmark average order/contract value of {formatINR(industry.aov)}
+              </p>
+            </div>
+
+            {/* Secondary Metrics 2x2 */}
+            <div className="grid grid-cols-2 gap-3.5">
+              <div className="p-3.5 rounded-xl bg-muted/40 border border-border/70">
+                <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-1">
+                  <Users className="w-3.5 h-3.5 text-primary" />
+                  <span>Est. Impressions</span>
                 </div>
+                <div className="text-lg sm:text-xl font-bold text-foreground">
+                  {calculations.impressions}
+                </div>
+                <div className="text-[11px] text-muted-foreground mt-0.5">Target audience reach</div>
+              </div>
 
-                <Button
-                  onClick={calculateROI}
-                  className="w-full bg-gradient-to-r from-primary via-pink-500 to-orange-500 h-14 text-lg font-semibold shadow-lg hover:shadow-primary/25 transition-all"
-                  disabled={!monthlyBudget}
-                >
-                  Calculate Results
-                </Button>
-              </CardContent>
-            </Card>
+              <div className="p-3.5 rounded-xl bg-muted/40 border border-border/70">
+                <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-1">
+                  <Target className="w-3.5 h-3.5 text-primary" />
+                  <span>Qualified Visitors</span>
+                </div>
+                <div className="text-lg sm:text-xl font-bold text-foreground">
+                  {calculations.clicks}
+                </div>
+                <div className="text-[11px] text-muted-foreground mt-0.5">High-intent landing clicks</div>
+              </div>
 
-            {/* Results */}
-            <Card className="glass-effect border-white/10">
-              <CardHeader>
-                <CardTitle>Estimated Monthly Results</CardTitle>
-              </CardHeader>
-              <CardContent>
-                {results ? (
-                  <div className="space-y-6">
-                    <div className="space-y-4">
-                      
-                      <div className="p-5 rounded-2xl bg-primary/10 border border-primary/20 hover:scale-[1.02] transition-transform">
-                        <div className="flex items-center gap-2 mb-2">
-                          <Heart className="w-5 h-5 text-primary" />
-                          <span className="text-sm font-medium text-primary">Expected Engagement</span>
-                        </div>
-                        <p className="text-3xl font-bold text-white">
-                          {results.reachRange}
-                        </p>
-                        <p className="text-sm text-muted-foreground mt-1">Likes, Comments, Shares, & Views</p>
-                      </div>
+              <div className="p-3.5 rounded-xl bg-muted/40 border border-border/70">
+                <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-1">
+                  <DollarSign className="w-3.5 h-3.5 text-primary" />
+                  <span>Estimated Orders/Leads</span>
+                </div>
+                <div className="text-lg sm:text-xl font-bold text-foreground">
+                  {calculations.conversions}
+                </div>
+                <div className="text-[11px] text-muted-foreground mt-0.5">At ~{industry.cvr}% conversion rate</div>
+              </div>
 
-                      <div className="p-5 rounded-2xl bg-accent/10 border border-accent/20 hover:scale-[1.02] transition-transform">
-                        <div className="flex items-center gap-2 mb-2">
-                          <Users className="w-5 h-5 text-accent" />
-                          <span className="text-sm font-medium text-accent">Qualified Leads</span>
-                        </div>
-                        <p className="text-3xl font-bold text-white">
-                          {results.leadsRange}
-                        </p>
-                        <p className="text-sm text-muted-foreground mt-1">Potential customers reaching out</p>
-                      </div>
+              <div className="p-3.5 rounded-xl bg-muted/40 border border-border/70">
+                <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-1">
+                  <TrendingUp className="w-3.5 h-3.5 text-primary" />
+                  <span>Estimated Blended ROAS</span>
+                </div>
+                <div className="text-lg sm:text-xl font-bold text-primary">
+                  {calculations.roas}
+                </div>
+                <div className="text-[11px] text-muted-foreground mt-0.5">Net return on ad spend</div>
+              </div>
+            </div>
 
-                      <div className="p-5 rounded-2xl bg-orange-500/10 border border-orange-500/20 hover:scale-[1.02] transition-transform">
-                        <div className="flex items-center gap-2 mb-2">
-                          <TrendingUp className="w-5 h-5 text-orange-500" />
-                          <span className="text-sm font-medium text-orange-500">Estimated ROI</span>
-                        </div>
-                        <p className="text-3xl font-bold text-white">
-                          {results.roi}
-                        </p>
-                        <p className="text-sm text-muted-foreground mt-1">Return on ad spend</p>
-                      </div>
-
-                    </div>
-
-                    <div className="pt-2">
-                      <Button
-                        onClick={() => {
-                          window.location.href = "mailto:jhasaurav562@gmail.com";
-                        }}
-                        className="w-full bg-white text-black hover:bg-gray-200 h-12"
-                      >
-                        Start Growing Now
-                      </Button>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="flex flex-col items-center justify-center h-full min-h-[300px] text-center px-4">
-                    <Calculator className="w-16 h-16 text-muted-foreground/30 mb-4 animate-pulse" />
-                    <p className="text-lg text-muted-foreground">
-                      Enter your budget to unlock your brand's true potential.
-                    </p>
-                  </div>
-                )}
-              </CardContent>
-            </Card>
+            {/* Action CTA */}
+            <div className="pt-2">
+              <Button
+                onClick={() => {
+                  const contact = document.getElementById('contact');
+                  contact?.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="w-full h-12 text-sm font-semibold flex items-center justify-center gap-2 shadow-sm"
+              >
+                <span>Get a Custom Media Plan for {formatINR(budget)}</span>
+                <ArrowRight className="w-4 h-4" />
+              </Button>
+              <div className="flex items-center justify-center gap-2 mt-3 text-[11px] text-muted-foreground">
+                <ShieldCheck className="w-3.5 h-3.5 text-emerald-500" />
+                <span>Zero obligations • Includes competitive keyword breakdown</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>

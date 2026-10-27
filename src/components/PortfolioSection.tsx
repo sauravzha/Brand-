@@ -1,6 +1,4 @@
-import { TrendingUp, Target, Award } from "lucide-react";
-import TrendChart3D from "./3d/TrendChart3D";
-import { useEffect, useState } from "react";
+import { TrendingUp, Target, Award, ArrowUpRight } from "lucide-react";
 
 const portfolioItems = [
   {
@@ -11,7 +9,9 @@ const portfolioItems = [
       clicks: "125K+",
       engagement: "+340%"
     },
-    description: "Complete digital transformation with Instagram, Google Ads, and SEO strategy"
+    description: "Complete digital transformation with Instagram, Google Ads, and SEO strategy",
+    color: "from-blue-500/10 to-cyan-500/10",
+    borderColor: "hover:border-blue-500/20"
   },
   {
     brand: "EcoLife Store",
@@ -21,7 +21,9 @@ const portfolioItems = [
       clicks: "95K+",
       engagement: "+280%"
     },
-    description: "Facebook Ads campaign driving sustainable product sales"
+    description: "Facebook Ads campaign driving sustainable product sales",
+    color: "from-green-500/10 to-emerald-500/10",
+    borderColor: "hover:border-green-500/20"
   },
   {
     brand: "FitFusion App",
@@ -31,97 +33,101 @@ const portfolioItems = [
       clicks: "180K+",
       engagement: "+420%"
     },
-    description: "Multi-platform campaign with YouTube Ads and influencer partnerships"
+    description: "Multi-platform campaign with YouTube Ads and influencer partnerships",
+    color: "from-orange-500/10 to-amber-500/10",
+    borderColor: "hover:border-orange-500/20"
   }
 ];
 
 const PortfolioSection = () => {
-  const [sectionOffset, setSectionOffset] = useState(0);
-
-  useEffect(() => {
-    const section = document.getElementById('portfolio');
-    if (section) {
-      setSectionOffset(section.offsetTop);
-    }
-  }, []);
-
   return (
-    <section id="portfolio" className="py-20 sm:py-32 relative overflow-hidden">
-      {/* Background Elements */}
+    <section id="portfolio" className="py-24 sm:py-36 relative overflow-hidden">
+      {/* Background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 right-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
-      </div>
-
-      {/* 3D Trend Chart */}
-      <div className="absolute right-0 top-20 w-full md:w-1/2 h-[400px] pointer-events-none">
-        <TrendChart3D triggerScroll={sectionOffset} />
+        <div className="absolute top-1/4 right-0 w-80 h-80 bg-primary/[0.04] rounded-full blur-[100px]" />
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
-        <div className="text-center space-y-4 mb-12 sm:mb-16">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold font-poppins">
-            Our <span className="text-gradient">Impact</span>
-          </h2>
-          <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">
-            Real results from real brands we've helped grow
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 sm:mb-20">
+          <div className="space-y-4 max-w-xl">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-border bg-muted/50 text-xs font-medium text-muted-foreground uppercase tracking-widest">
+              Our work
+            </div>
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold font-poppins tracking-tight leading-[1.1]">
+              Results that<br />
+              <span className="text-gradient">speak for themselves</span>
+            </h2>
+          </div>
+          <p className="text-base text-muted-foreground max-w-sm leading-relaxed md:text-right">
+            Real metrics from real campaigns — not vanity numbers, actual business impact.
           </p>
         </div>
 
         {/* Portfolio Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 mb-12 sm:mb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 sm:gap-6 mb-12">
           {portfolioItems.map((item, index) => (
             <div
               key={index}
-              className="group glass-effect p-6 sm:p-8 rounded-2xl hover:scale-105 transition-all duration-300 hover:shadow-xl hover:shadow-primary/20"
+              className={`group border border-border/60 bg-card/30 backdrop-blur-sm rounded-2xl overflow-hidden hover:shadow-lg hover:shadow-primary/5 transition-all duration-500 ${item.borderColor}`}
             >
-              <div className="flex items-center justify-between mb-4 sm:mb-6">
-                <div>
-                  <h3 className="text-xl sm:text-2xl font-bold font-poppins group-hover:text-gradient transition-all">
-                    {item.brand}
-                  </h3>
-                  <p className="text-sm text-muted-foreground">{item.category}</p>
+              {/* Top gradient accent bar */}
+              <div className={`h-1 bg-gradient-to-r ${item.color.replace('/10', '')}`} />
+              
+              <div className="p-7 sm:p-8">
+                <div className="flex items-start justify-between mb-5">
+                  <div>
+                    <h3 className="text-xl sm:text-2xl font-bold font-poppins mb-1">
+                      {item.brand}
+                    </h3>
+                    <p className="text-xs text-muted-foreground uppercase tracking-wider">{item.category}</p>
+                  </div>
+                  <div className="w-9 h-9 rounded-full border border-border flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
+                    <ArrowUpRight className="w-4 h-4 text-foreground/50" />
+                  </div>
                 </div>
-                <Award className="w-8 h-8 text-primary" />
-              </div>
 
-              <p className="text-sm sm:text-base text-muted-foreground mb-6 leading-relaxed">
-                {item.description}
-              </p>
+                <p className="text-sm text-muted-foreground mb-6 leading-relaxed">
+                  {item.description}
+                </p>
 
-              <div className="space-y-4">
-                <div className="flex items-center justify-between py-3 border-t border-border/50">
-                  <span className="text-sm text-muted-foreground flex items-center gap-2">
-                    <TrendingUp className="w-4 h-4" /> Impressions
-                  </span>
-                  <span className="text-lg font-bold text-gradient">{item.metrics.impressions}</span>
-                </div>
-                <div className="flex items-center justify-between py-3 border-t border-border/50">
-                  <span className="text-sm text-muted-foreground flex items-center gap-2">
-                    <Target className="w-4 h-4" /> Clicks
-                  </span>
-                  <span className="text-lg font-bold text-gradient">{item.metrics.clicks}</span>
-                </div>
-                <div className="flex items-center justify-between py-3 border-t border-border/50">
-                  <span className="text-sm text-muted-foreground flex items-center gap-2">
-                    <Award className="w-4 h-4" /> Engagement
-                  </span>
-                  <span className="text-lg font-bold text-gradient">{item.metrics.engagement}</span>
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between py-3 border-t border-border/40">
+                    <span className="text-xs text-muted-foreground flex items-center gap-2 uppercase tracking-wider">
+                      <TrendingUp className="w-3.5 h-3.5" /> Impressions
+                    </span>
+                    <span className="text-base font-bold text-foreground">{item.metrics.impressions}</span>
+                  </div>
+                  <div className="flex items-center justify-between py-3 border-t border-border/40">
+                    <span className="text-xs text-muted-foreground flex items-center gap-2 uppercase tracking-wider">
+                      <Target className="w-3.5 h-3.5" /> Clicks
+                    </span>
+                    <span className="text-base font-bold text-foreground">{item.metrics.clicks}</span>
+                  </div>
+                  <div className="flex items-center justify-between py-3 border-t border-border/40">
+                    <span className="text-xs text-muted-foreground flex items-center gap-2 uppercase tracking-wider">
+                      <Award className="w-3.5 h-3.5" /> Engagement
+                    </span>
+                    <span className="text-base font-bold text-gradient">{item.metrics.engagement}</span>
+                  </div>
                 </div>
               </div>
             </div>
           ))}
         </div>
 
-        {/* Trusted by Innovation Brands */}
-        <div className="text-center glass-effect p-8 sm:p-12 rounded-3xl">
-          <h3 className="text-2xl sm:text-3xl font-bold font-poppins mb-4">
-            Trusted by <span className="text-gradient">Innovation Brands</span>
-          </h3>
-          <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-gradient-to-r from-primary/20 to-accent/20 border border-primary/30">
-            <div className="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
-            <span className="text-lg font-semibold text-gradient">Coming Soon</span>
-          </div>
+        {/* Bottom CTA — replacing generic "Coming Soon" */}
+        <div className="text-center border border-border/40 bg-card/20 p-8 sm:p-10 rounded-2xl max-w-2xl mx-auto">
+          <p className="text-muted-foreground text-sm mb-4">
+            Want to see your brand here? Let's create your success story.
+          </p>
+          <a
+            href="#contact"
+            className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors font-medium text-sm group"
+          >
+            Start your project
+            <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+          </a>
         </div>
       </div>
     </section>

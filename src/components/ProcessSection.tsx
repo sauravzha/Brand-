@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Search, Target, Rocket, BarChart3, CheckCircle2 } from 'lucide-react';
-import DataNetwork3D from './3d/DataNetwork3D';
+import { Search, Target, Rocket, BarChart3, CheckCircle2, ArrowRight } from 'lucide-react';
 
 const processSteps = [
   {
@@ -35,7 +34,7 @@ const processSteps = [
     title: 'Execution & Optimization',
     description: 'Our team executes campaigns while continuously monitoring performance and optimizing for best results in real-time.',
     icon: Rocket,
-    color: 'from-orange-500 to-accent',
+    color: 'from-orange-500 to-amber-500',
     details: [
       'Campaign launch',
       'Content creation',
@@ -84,16 +83,16 @@ const ProcessSection = () => {
   }, []);
 
   return (
-    <section id="process" className="py-20 sm:py-32 relative overflow-hidden">
-      {/* Background Elements */}
+    <section id="process" className="py-24 sm:py-36 relative overflow-hidden bg-muted/30">
+      {/* Subtle background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl" />
-      </div>
-
-      {/* 3D Background */}
-      <div className="absolute right-0 top-20 w-full md:w-1/2 h-[500px] pointer-events-none opacity-20">
-        <DataNetwork3D />
+        <div className="absolute top-0 right-0 w-80 h-80 bg-primary/[0.04] rounded-full blur-[100px]" />
+        <div className="absolute bottom-0 left-0 w-80 h-80 bg-accent/[0.04] rounded-full blur-[100px]" />
+        {/* Subtle grid */}
+        <div 
+          className="absolute inset-0 opacity-[0.02]"
+          style={{ backgroundImage: 'linear-gradient(hsl(var(--foreground)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--foreground)) 1px, transparent 1px)', backgroundSize: '60px 60px' }}
+        />
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -102,66 +101,83 @@ const ProcessSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={isVisible ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center space-y-4 mb-12 sm:mb-20"
+          className="text-center space-y-4 mb-16 sm:mb-24"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold font-poppins">
-            How We <span className="text-gradient">Work</span>
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-border bg-background text-xs font-medium text-muted-foreground uppercase tracking-widest">
+            Our process
+          </div>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold font-poppins tracking-tight">
+            Four steps to<br />
+            <span className="text-gradient">your growth</span>
           </h2>
-          <p className="text-base sm:text-lg text-muted-foreground max-w-3xl mx-auto">
-            Our proven 4-step process ensures your brand gets the results it deserves
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto font-light">
+            Our proven methodology ensures your brand gets measurable results, not just vanity metrics.
           </p>
         </motion.div>
 
-        {/* Process Steps */}
-        <div className="max-w-5xl mx-auto space-y-8 sm:space-y-12">
-          {processSteps.map((step, index) => {
-            const Icon = step.icon;
-            const isEven = index % 2 === 0;
+        {/* Process Steps — alternating layout with connected line */}
+        <div className="max-w-5xl mx-auto relative">
+          {/* Vertical connecting line */}
+          <div className="absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-primary/20 via-primary/10 to-transparent hidden md:block" />
 
-            return (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, x: isEven ? -50 : 50 }}
-                animate={isVisible ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                className={`flex flex-col ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'} gap-6 sm:gap-8 items-center`}
-              >
-                {/* Icon & Number */}
-                <div className="flex-shrink-0 w-full md:w-1/3">
-                  <div className="relative">
-                    <div className={`w-24 h-24 sm:w-32 sm:h-32 rounded-2xl bg-gradient-to-br ${step.color} flex items-center justify-center shadow-lg shadow-primary/30 mx-auto`}>
-                      <Icon className="w-12 h-12 sm:w-16 sm:h-16 text-white" />
-                    </div>
-                    <div className="absolute -top-4 -right-4 sm:-top-6 sm:-right-6">
-                      <span className="text-4xl sm:text-6xl font-bold text-gradient opacity-20 font-poppins">
-                        {step.number}
-                      </span>
+          <div className="space-y-8 sm:space-y-16">
+            {processSteps.map((step, index) => {
+              const Icon = step.icon;
+              const isEven = index % 2 === 0;
+
+              return (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, x: isEven ? -30 : 30 }}
+                  animate={isVisible ? { opacity: 1, x: 0 } : {}}
+                  transition={{ duration: 0.6, delay: index * 0.15 }}
+                  className={`flex flex-col ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'} gap-6 sm:gap-10 items-center relative`}
+                >
+                  {/* Step number dot on the line */}
+                  <div className="absolute left-1/2 -translate-x-1/2 hidden md:flex items-center justify-center">
+                    <div className={`w-12 h-12 rounded-full bg-gradient-to-br ${step.color} flex items-center justify-center text-white text-sm font-bold shadow-lg z-10`}>
+                      {step.number}
                     </div>
                   </div>
-                </div>
 
-                {/* Content */}
-                <div className="flex-1 w-full md:w-2/3">
-                  <div className="glass-effect p-6 sm:p-8 rounded-2xl space-y-4">
-                    <h3 className="text-2xl sm:text-3xl font-bold font-poppins">
-                      {step.title}
-                    </h3>
-                    <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
-                      {step.description}
-                    </p>
-                    <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4">
-                      {step.details.map((detail, detailIndex) => (
-                        <li key={detailIndex} className="flex items-center gap-2">
-                          <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0" />
-                          <span className="text-sm text-foreground/80">{detail}</span>
-                        </li>
-                      ))}
-                    </ul>
+                  {/* Icon Block */}
+                  <div className="flex-shrink-0 w-full md:w-[calc(50%-3rem)]">
+                    <div className={`flex ${isEven ? 'md:justify-end' : 'md:justify-start'} justify-center`}>
+                      <div className="relative">
+                        <div className={`w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-gradient-to-br ${step.color} flex items-center justify-center shadow-xl`}>
+                          <Icon className="w-10 h-10 sm:w-12 sm:h-12 text-white" />
+                        </div>
+                        {/* Mobile step number */}
+                        <div className="md:hidden absolute -top-3 -right-3 w-8 h-8 rounded-full bg-background border-2 border-border flex items-center justify-center text-xs font-bold text-foreground">
+                          {step.number}
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </motion.div>
-            );
-          })}
+
+                  {/* Content */}
+                  <div className="flex-shrink-0 w-full md:w-[calc(50%-3rem)]">
+                    <div className="border border-border/60 bg-card/50 backdrop-blur-sm p-6 sm:p-8 rounded-2xl space-y-4 hover:border-primary/20 hover:shadow-lg hover:shadow-primary/5 transition-all duration-500">
+                      <h3 className="text-xl sm:text-2xl font-bold font-poppins">
+                        {step.title}
+                      </h3>
+                      <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
+                        {step.description}
+                      </p>
+                      <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mt-4">
+                        {step.details.map((detail, detailIndex) => (
+                          <li key={detailIndex} className="flex items-center gap-2">
+                            <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0" />
+                            <span className="text-sm text-foreground/70">{detail}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
         </div>
 
         {/* CTA */}
@@ -169,16 +185,14 @@ const ProcessSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={isVisible ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.8 }}
-          className="text-center mt-12 sm:mt-16"
+          className="text-center mt-16 sm:mt-24"
         >
-          <p className="text-lg text-muted-foreground mb-6">
-            Ready to start your digital journey?
-          </p>
           <a
             href="#contact"
-            className="inline-block px-8 py-4 bg-gradient-to-r from-primary via-pink-500 to-orange-500 rounded-xl font-semibold text-white hover:shadow-xl hover:shadow-primary/50 transition-all duration-300"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-primary via-pink-500 to-orange-500 rounded-xl font-semibold text-white hover:shadow-xl hover:shadow-primary/30 transition-all duration-300 group"
           >
-            Get Started Today
+            Get started today
+            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </a>
         </motion.div>
       </div>
@@ -187,4 +201,3 @@ const ProcessSection = () => {
 };
 
 export default ProcessSection;
-

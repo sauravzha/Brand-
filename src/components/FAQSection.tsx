@@ -4,7 +4,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import SparkleGrid3D from "./3d/SparkleGrid3D";
 
 const faqs = [
   {
@@ -13,7 +12,7 @@ const faqs = [
   },
   {
     question: "How much do your services cost?",
-    answer: "We offer three flexible packages: Starter (₹8000/month) perfect for small businesses, Growth (₹17,999/month) for expanding brands, and Enterprise (Custom pricing) for established businesses. Each package includes different features and support levels to match your needs and budget."
+    answer: "We offer three flexible packages: Essential (₹20,000/month) perfect for small businesses, Growth (₹50,000/month) for expanding brands, and Enterprise (Custom pricing) for established businesses. Each package includes different features and support levels to match your needs and budget."
   },
   {
     question: "How long does it take to see results?",
@@ -21,7 +20,7 @@ const faqs = [
   },
   {
     question: "Do you work with startups or only established businesses?",
-    answer: "We specialize in working with startups and modern businesses of all sizes! Whether you're just launching or looking to scale, we have packages and strategies designed for your stage of growth. Our Starter package is specifically designed for new businesses with limited budgets."
+    answer: "We specialize in working with startups and modern businesses of all sizes! Whether you're just launching or looking to scale, we have packages and strategies designed for your stage of growth. Our Essential package is specifically designed for new businesses with limited budgets."
   },
   {
     question: "What makes Brandयात्रा different from other agencies?",
@@ -43,61 +42,62 @@ const faqs = [
 
 const FAQSection = () => {
   return (
-    <section id="faq" className="py-20 sm:py-32 relative overflow-hidden">
-      {/* Background Elements */}
+    <section id="faq" className="py-24 sm:py-36 relative overflow-hidden bg-muted/30">
+      {/* Background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/2 right-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl" />
-      </div>
-
-      {/* 3D Sparkle Grid */}
-      <div className="absolute left-1/2 -translate-x-1/2 top-0 w-full max-w-[600px] h-[400px] pointer-events-none opacity-20">
-        <SparkleGrid3D />
+        <div className="absolute top-1/2 right-0 w-80 h-80 bg-primary/[0.03] rounded-full blur-[100px]" />
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Section Header */}
-        <div className="text-center space-y-4 mb-12 sm:mb-16">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold font-poppins">
-            Frequently Asked <span className="text-gradient">Questions</span>
-          </h2>
-          <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">
-            Everything you need to know about our services and how we can help grow your brand
-          </p>
-        </div>
+        {/* Two-column layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 max-w-6xl mx-auto">
+          {/* Left: Header (sticky on desktop) */}
+          <div className="lg:col-span-4 lg:sticky lg:top-24 lg:self-start">
+            <div className="space-y-4">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-border bg-background text-xs font-medium text-muted-foreground uppercase tracking-widest">
+                FAQ
+              </div>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold font-poppins tracking-tight leading-[1.1]">
+                Questions?<br />
+                <span className="text-gradient">We've got answers.</span>
+              </h2>
+              <p className="text-base text-muted-foreground leading-relaxed">
+                Everything you need to know about working with us.
+              </p>
+              <div className="pt-4">
+                <p className="text-sm text-muted-foreground mb-2">Still have questions?</p>
+                <a
+                  href="mailto:jhasaurav562@gmail.com"
+                  className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors font-medium text-sm group"
+                >
+                  Get in touch
+                  <svg className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
 
-        {/* FAQ Accordion */}
-        <div className="max-w-3xl mx-auto">
-          <Accordion type="single" collapsible className="space-y-4">
-            {faqs.map((faq, index) => (
-              <AccordionItem
-                key={index}
-                value={`item-${index}`}
-                className="glass-effect rounded-2xl border-none px-6 sm:px-8 data-[state=open]:shadow-xl data-[state=open]:shadow-primary/10 transition-all duration-300"
-              >
-                <AccordionTrigger className="text-left text-base sm:text-lg font-semibold hover:text-primary transition-colors py-6 hover:no-underline">
-                  {faq.question}
-                </AccordionTrigger>
-                <AccordionContent className="text-sm sm:text-base text-muted-foreground leading-relaxed pb-6">
-                  {faq.answer}
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-        </div>
-
-        {/* CTA */}
-        <div className="text-center mt-12 sm:mt-16">
-          <p className="text-muted-foreground mb-4">Still have questions?</p>
-          <a
-            href="mailto:jhasaurav562@gmail.com"
-            className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors font-medium text-lg group"
-          >
-            Get in touch with us
-            <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </a>
+          {/* Right: Accordion */}
+          <div className="lg:col-span-8">
+            <Accordion type="single" collapsible className="space-y-3">
+              {faqs.map((faq, index) => (
+                <AccordionItem
+                  key={index}
+                  value={`item-${index}`}
+                  className="border border-border/60 bg-card/30 backdrop-blur-sm rounded-xl px-6 sm:px-7 data-[state=open]:border-primary/20 data-[state=open]:shadow-lg data-[state=open]:shadow-primary/5 transition-all duration-300"
+                >
+                  <AccordionTrigger className="text-left text-sm sm:text-base font-semibold hover:text-primary transition-colors py-5 hover:no-underline [&[data-state=open]]:text-primary">
+                    {faq.question}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-sm text-muted-foreground leading-relaxed pb-5">
+                    {faq.answer}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </div>
         </div>
       </div>
     </section>

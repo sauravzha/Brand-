@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Smooth scrolling globally */
+html {
+  scroll-behavior: smooth;
+}
+
 /* Hide scrollbar for horizontal scroll while keeping functionality */
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
@@ -12,6 +17,54 @@
   scrollbar-width: none;
 }
 
+/* Custom scrollbar styling — subtle, refined */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.2);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.35);
+}
+
+/* Firefox custom scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--muted-foreground) / 0.2) transparent;
+}
+
+/* Custom text selection color */
+::selection {
+  background: hsl(258 90% 66% / 0.2);
+  color: inherit;
+}
+::-moz-selection {
+  background: hsl(258 90% 66% / 0.2);
+  color: inherit;
+}
+
+/* Page load animation */
+@keyframes pageLoad {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+body {
+  animation: pageLoad 0.4s ease-out;
+}
+
 /* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
 All colors MUST be HSL.
 */
@@ -19,7 +72,7 @@ All colors MUST be HSL.
 @layer base {
   :root {
     /* Light mode variables */
-    --background: 0 0% 100%;
+    --background: 0 0% 99%;
     --foreground: 222.2 84% 4.9%;
 
     --card: 0 0% 100%;
@@ -35,7 +88,7 @@ All colors MUST be HSL.
     --secondary-foreground: 222.2 47.4% 11.2%;
 
     --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted-foreground: 215 16% 47%;
 
     --accent: 187 100% 40%;
     /* Darker cyan for light mode visibility */
@@ -48,7 +101,7 @@ All colors MUST be HSL.
     --input: 214.3 31.8% 91.4%;
     --ring: 258 90% 66%;
 
-    --radius: 1rem;
+    --radius: 0.75rem;
 
     /* Custom brand gradients - Light mode */
     --gradient-primary: linear-gradient(135deg, hsl(258 90% 66%), hsl(330 85% 65%), hsl(25 95% 62%));
@@ -56,13 +109,13 @@ All colors MUST be HSL.
     --gradient-glow: linear-gradient(135deg, hsl(258 90% 66% / 0.1), hsl(330 85% 65% / 0.1), hsl(25 95% 62% / 0.1));
 
     /* Glass effect - Light mode */
-    --glass-bg: rgba(255, 255, 255, 0.7);
-    --glass-border: rgba(0, 0, 0, 0.1);
+    --glass-bg: rgba(255, 255, 255, 0.6);
+    --glass-border: rgba(0, 0, 0, 0.06);
 
     /* Glows and shadows - Light mode */
-    --glow-primary: 0 0 40px hsl(258 90% 66% / 0.2);
-    --glow-accent: 0 0 40px hsl(187 100% 40% / 0.2);
-    --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+    --glow-primary: 0 0 40px hsl(258 90% 66% / 0.15);
+    --glow-accent: 0 0 40px hsl(187 100% 40% / 0.15);
+    --shadow-glass: 0 4px 24px 0 rgba(0, 0, 0, 0.06);
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -75,53 +128,53 @@ All colors MUST be HSL.
   }
 
   .dark {
-    /* Deep navy/charcoal base */
-    --background: 221 70% 5%;
-    --foreground: 0 0% 100%;
+    /* Deep navy/charcoal base — slightly warmer */
+    --background: 224 71% 4%;
+    --foreground: 213 31% 91%;
 
-    /* Glassmorphic card backgrounds */
-    --card: 221 60% 8%;
-    --card-foreground: 0 0% 100%;
+    /* Card backgrounds */
+    --card: 224 60% 7%;
+    --card-foreground: 213 31% 91%;
 
-    --popover: 221 60% 8%;
-    --popover-foreground: 0 0% 100%;
+    --popover: 224 60% 7%;
+    --popover-foreground: 213 31% 91%;
 
     /* Primary gradient purple */
     --primary: 258 90% 66%;
     --primary-foreground: 0 0% 100%;
 
     /* Secondary muted dark */
-    --secondary: 221 50% 15%;
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 221 50% 12%;
+    --secondary-foreground: 213 31% 91%;
 
     /* Muted surfaces */
-    --muted: 221 45% 12%;
-    --muted-foreground: 220 9% 69%;
+    --muted: 221 45% 10%;
+    --muted-foreground: 218 11% 55%;
 
     /* Accent cyan */
     --accent: 187 100% 50%;
-    --accent-foreground: 221 70% 5%;
+    --accent-foreground: 224 71% 4%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 221 40% 20%;
-    --input: 221 40% 20%;
+    --border: 222 28% 14%;
+    --input: 222 28% 14%;
     --ring: 258 90% 66%;
 
     /* Custom brand gradients */
     --gradient-primary: linear-gradient(135deg, hsl(258 90% 66%), hsl(330 85% 65%), hsl(25 95% 62%));
     --gradient-accent: linear-gradient(135deg, hsl(258 90% 66%), hsl(187 100% 50%));
-    --gradient-glow: linear-gradient(135deg, hsl(258 90% 66% / 0.3), hsl(330 85% 65% / 0.3), hsl(25 95% 62% / 0.3));
+    --gradient-glow: linear-gradient(135deg, hsl(258 90% 66% / 0.2), hsl(330 85% 65% / 0.2), hsl(25 95% 62% / 0.2));
 
     /* Glass effect */
-    --glass-bg: rgba(255, 255, 255, 0.05);
-    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-bg: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.06);
 
     /* Glows and shadows */
-    --glow-primary: 0 0 40px hsl(258 90% 66% / 0.5);
-    --glow-accent: 0 0 40px hsl(187 100% 50% / 0.5);
-    --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    --glow-primary: 0 0 40px hsl(258 90% 66% / 0.3);
+    --glow-accent: 0 0 40px hsl(187 100% 50% / 0.3);
+    --shadow-glass: 0 4px 24px 0 rgba(0, 0, 0, 0.4);
 
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
@@ -140,7 +193,9 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground font-[Inter] antialiased;
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    letter-spacing: -0.011em;
   }
 
   h1,
@@ -149,7 +204,7 @@ All colors MUST be HSL.
   h4,
   h5,
   h6 {
-    @apply font-[Poppins];
+    font-family: 'Poppins', 'Inter', sans-serif;
   }
 }
 
@@ -183,11 +238,11 @@ All colors MUST be HSL.
 
   @keyframes glow {
     from {
-      box-shadow: 0 0 20px hsl(258 90% 66% / 0.3);
+      box-shadow: 0 0 20px hsl(258 90% 66% / 0.2);
     }
 
     to {
-      box-shadow: 0 0 40px hsl(258 90% 66% / 0.6), 0 0 60px hsl(330 85% 65% / 0.4);
+      box-shadow: 0 0 40px hsl(258 90% 66% / 0.4), 0 0 60px hsl(330 85% 65% / 0.2);
     }
   }
 
@@ -203,7 +258,7 @@ All colors MUST be HSL.
     }
 
     50% {
-      transform: translateY(-20px);
+      transform: translateY(-15px);
     }
   }
 
@@ -214,7 +269,7 @@ All colors MUST be HSL.
   @keyframes slideIn {
     from {
       opacity: 0;
-      transform: translateY(30px);
+      transform: translateY(20px);
     }
 
     to {
@@ -248,7 +303,7 @@ All colors MUST be HSL.
   }
 
   .hover-3d:hover {
-    transform: translateY(-10px) rotateX(5deg);
+    transform: translateY(-8px) rotateX(3deg);
   }
 
   /* Radial gradient utility */
